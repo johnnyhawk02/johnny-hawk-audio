@@ -6,24 +6,20 @@
 <title>Johnny Hawk Audio</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap">
 <style>
-/* Layout: maker-hardware landing page. Nav with pill CTA, plain big hero, the playable synth shown as a hardware object, product block with spec list, open-source cards, quiet footer. */
+/* Layout: maker-hardware landing page. Nav with pill CTA, plain big hero, product block with spec list, open-source cards, quiet footer. */
 :root {
   --bg: #fafaf9;
   --fg: #0c0d0e;
   --muted: #62666b;
   --line: #e4e4e2;
   --card: #ffffff;
-  --hw: #17181a;          /* device body */
-  --hw-fg: #e9eaec;
-  --hw-line: #2c2e31;
-  --accent: #ff5a1f;      /* one hardware-style signal color, used on the device only */
   --sans: "Geist", "Helvetica Neue", Arial, sans-serif;
   --mono: "Geist Mono", ui-monospace, Menlo, monospace;
 }
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
-  --bg: #0b0c0d; --fg: #f1f2f3; --muted: #9a9ea4; --line: #222427; --card: #131416; --hw: #1d1f22; --hw-fg: #e9eaec; --hw-line: #34373b; --accent: #ff6a33; color-scheme: dark } }
+  --bg: #0b0c0d; --fg: #f1f2f3; --muted: #9a9ea4; --line: #222427; --card: #131416; color-scheme: dark } }
 :root[data-theme="dark"] {
-  --bg: #0b0c0d; --fg: #f1f2f3; --muted: #9a9ea4; --line: #222427; --card: #131416; --hw: #1d1f22; --hw-fg: #e9eaec; --hw-line: #34373b; --accent: #ff6a33; color-scheme: dark }
+  --bg: #0b0c0d; --fg: #f1f2f3; --muted: #9a9ea4; --line: #222427; --card: #131416; color-scheme: dark }
 
 :root { padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px); }
 body { margin: 0; } img { max-width: 100%; }
@@ -40,6 +36,7 @@ a { color: inherit; }
 .links { display: flex; align-items: center; gap: 20px; font-size: 14px; }
 .links a { text-decoration: none; color: var(--muted); }
 .links a:hover { color: var(--fg); }
+.links a.btn, .links a.btn:hover { color: var(--bg); }
 .btn { display: inline-flex; align-items: center; gap: 8px; border-radius: 999px; padding: 10px 18px; font: 500 14px var(--sans); text-decoration: none; border: 1px solid var(--fg); background: var(--fg); color: var(--bg); white-space: nowrap; }
 .btn.ghost { background: transparent; color: var(--fg); border-color: var(--line); }
 .btn:hover { opacity: .88; }
@@ -51,28 +48,6 @@ h1 { font-size: clamp(40px, 8vw, 84px); line-height: 1; letter-spacing: -.045em;
 .sub { font-size: clamp(17px, 2.2vw, 20px); color: var(--muted); max-width: 46ch; margin: 0; }
 .ctas { display: flex; gap: 10px; flex-wrap: wrap; }
 
-/* Device, drawn as a piece of hardware */
-.stage { padding-block: 24px 72px; }
-.device { background: var(--hw); color: var(--hw-fg); border-radius: 28px; padding: clamp(16px, 3vw, 28px); display: flex; flex-direction: column; gap: 18px;
-  box-shadow: 0 1px 0 rgba(255,255,255,.06) inset, 0 30px 60px -30px rgba(0,0,0,.45); max-width: 760px; margin: 0 auto; }
-.dev-top { display: flex; justify-content: space-between; align-items: center; gap: 12px; font: 500 12px var(--mono); text-transform: uppercase; letter-spacing: .08em; color: #8e9298; }
-.dev-top b { color: var(--hw-fg); font-weight: 500; }
-.led { width: 8px; height: 8px; border-radius: 50%; background: #3a3d41; display: inline-block; margin-right: 8px; vertical-align: 1px; }
-.led.on { background: var(--accent); box-shadow: 0 0 10px var(--accent); }
-.screen { background: #0a0b0c; border: 1px solid var(--hw-line); border-radius: 14px; padding: 10px; }
-canvas { width: 100%; height: 80px; display: block; }
-.controls { display: grid; grid-template-columns: 1fr auto; gap: 12px 16px; align-items: end; }
-.controls label { display: flex; flex-direction: column; gap: 8px; min-width: 0; font: 500 12px var(--mono); text-transform: uppercase; letter-spacing: .08em; color: #8e9298; }
-.readout { color: var(--hw-fg); font-variant-numeric: tabular-nums; }
-input[type=range] { width: 100%; accent-color: var(--accent); }
-.waves { display: flex; background: #0a0b0c; border: 1px solid var(--hw-line); border-radius: 999px; padding: 3px; }
-.waves button { font: 500 12px var(--mono); text-transform: uppercase; background: none; color: #8e9298; border: 0; padding: 7px 12px; border-radius: 999px; cursor: pointer; }
-.waves button[aria-pressed=true] { background: var(--hw-fg); color: var(--hw); }
-.keys { display: grid; grid-template-columns: repeat(8, 1fr); gap: 6px; }
-.keys button { aspect-ratio: 1 / 1.6; max-width: 100%; border: 1px solid var(--hw-line); border-radius: 10px; background: #232528; color: #8e9298;
-  font: 500 11px var(--mono); display: flex; align-items: flex-end; justify-content: center; padding-bottom: 8px; cursor: pointer; touch-action: manipulation; user-select: none; -webkit-user-select: none; }
-.keys button.on { background: var(--accent); color: #140700; border-color: var(--accent); }
-.caption { text-align: center; color: var(--muted); font-size: 14px; margin: 14px 0 0; }
 
 /* Sections */
 .section { border-top: 1px solid var(--line); padding-block: 64px; }
@@ -123,29 +98,12 @@ footer { border-top: 1px solid var(--line); padding-block: 28px 40px; }
 <main id="top">
   <div class="gutter"><div class="inner hero">
     <h1>Instruments that run in your browser</h1>
-    <p class="sub">Drum machines, synths and plugins built with web audio. Open a link and play. No install, no account.</p>
+    <p class="sub">A drum machine and two synths built with web audio. Open a link and play. No install, no account.</p>
     <div class="ctas">
       <a class="btn" href="https://johnnyhawk02.github.io/elixir-desktop/">Open Elixir Desktop</a>
-      <a class="btn ghost" href="#hawk-one">Try the synth below</a>
+      <a class="btn ghost" href="#elixir-synth">Elixir Synth</a>
+      <a class="btn ghost" href="#tb303">303 Circuit Model</a>
     </div>
-  </div></div>
-
-  <div class="gutter stage" id="hawk-one"><div class="inner">
-    <div class="device" aria-label="Hawk One, a playable synth">
-      <div class="dev-top"><span><i class="led" id="led"></i><b>Hawk One</b></span><span>Mono synth · A minor</span></div>
-      <div class="screen"><canvas id="scope" width="700" height="80" aria-hidden="true"></canvas></div>
-      <div class="controls">
-        <label for="cutoff"><span>Cutoff <span class="readout" id="cutoffOut">1.8 kHz</span></span>
-          <input id="cutoff" type="range" min="0" max="1000" value="620"></label>
-        <div class="waves" role="group" aria-label="Waveform">
-          <button id="w-saw" data-w="sawtooth" aria-pressed="true">Saw</button>
-          <button id="w-sq" data-w="square" aria-pressed="false">Sqr</button>
-          <button id="w-tri" data-w="triangle" aria-pressed="false">Tri</button>
-        </div>
-      </div>
-      <div class="keys" id="keys"></div>
-    </div>
-    <p class="caption">Tap a key. Sound starts on your first touch.</p>
   </div></div>
 
   <section class="section gutter" id="elixir"><div class="inner product">
@@ -228,77 +186,5 @@ footer { border-top: 1px solid var(--line); padding-block: 28px 40px; }
   <span class="ok">Engine verified against firmware</span>
 </div></footer>
 
-<script>
-(() => {
-  // A minor pentatonic over two octaves: A3 C4 D4 E4 G4 A4 C5 D5
-  const notes = [["A3",220],["C4",261.63],["D4",293.66],["E4",329.63],["G4",392],["A4",440],["C5",523.25],["D5",587.33]];
-  const keysEl = document.getElementById("keys");
-  const cutoff = document.getElementById("cutoff");
-  const cutoffOut = document.getElementById("cutoffOut");
-  const led = document.getElementById("led");
-  const canvas = document.getElementById("scope");
-  const g = canvas.getContext("2d");
-  let ctx, filter, master, analyser, wave = "sawtooth";
-  const voices = new Map();
-
-  const hz = () => Math.round(80 * Math.pow(12000 / 80, cutoff.value / 1000));
-  const showHz = () => { const v = hz(); cutoffOut.textContent = v >= 1000 ? (v / 1000).toFixed(1) + " kHz" : v + " Hz"; };
-  showHz();
-
-  function init() {
-    if (ctx) return;
-    ctx = new (window.AudioContext || window.webkitAudioContext)();
-    filter = ctx.createBiquadFilter(); filter.type = "lowpass"; filter.Q.value = 6; filter.frequency.value = hz();
-    master = ctx.createGain(); master.gain.value = 0.25;
-    analyser = ctx.createAnalyser(); analyser.fftSize = 1024;
-    filter.connect(master).connect(analyser).connect(ctx.destination);
-    const buf = new Float32Array(analyser.fftSize);
-    (function loop() { analyser.getFloatTimeDomainData(buf); line(buf); requestAnimationFrame(loop); })();
-  }
-  function start(i, btn) {
-    init(); if (ctx.state === "suspended") ctx.resume();
-    if (voices.has(i)) return;
-    const o = ctx.createOscillator(), a = ctx.createGain(), t = ctx.currentTime;
-    o.type = wave; o.frequency.value = notes[i][1];
-    a.gain.setValueAtTime(0, t); a.gain.linearRampToValueAtTime(0.9, t + 0.01); a.gain.setTargetAtTime(0.6, t + 0.01, 0.15);
-    o.connect(a).connect(filter); o.start();
-    voices.set(i, { o, a }); btn.classList.add("on"); led.classList.add("on");
-  }
-  function stop(i, btn) {
-    const v = voices.get(i); if (!v) return;
-    const t = ctx.currentTime;
-    v.a.gain.cancelScheduledValues(t); v.a.gain.setTargetAtTime(0, t, 0.08); v.o.stop(t + 0.6);
-    voices.delete(i); btn.classList.remove("on"); if (!voices.size) led.classList.remove("on");
-  }
-  notes.forEach(([name], i) => {
-    const b = document.createElement("button");
-    b.id = "key-" + i; b.textContent = name; b.setAttribute("aria-label", "Play " + name);
-    b.addEventListener("pointerdown", e => { e.preventDefault(); b.setPointerCapture?.(e.pointerId); start(i, b); });
-    ["pointerup", "pointercancel", "lostpointercapture"].forEach(ev => b.addEventListener(ev, () => stop(i, b)));
-    b.addEventListener("keydown", e => { if ((e.key === " " || e.key === "Enter") && !e.repeat) { e.preventDefault(); start(i, b); } });
-    b.addEventListener("keyup", e => { if (e.key === " " || e.key === "Enter") stop(i, b); });
-    keysEl.appendChild(b);
-  });
-  cutoff.addEventListener("input", () => { showHz(); if (filter) filter.frequency.setTargetAtTime(hz(), ctx.currentTime, 0.02); });
-  document.querySelectorAll(".waves button").forEach(b => b.addEventListener("click", () => {
-    wave = b.dataset.w;
-    document.querySelectorAll(".waves button").forEach(x => x.setAttribute("aria-pressed", x === b));
-    voices.forEach(v => v.o.type = wave);
-  }));
-
-  function line(data) {
-    const accent = getComputedStyle(document.documentElement).getPropertyValue("--accent").trim();
-    g.clearRect(0, 0, canvas.width, canvas.height);
-    g.strokeStyle = accent; g.lineWidth = 2; g.beginPath();
-    for (let x = 0; x < canvas.width; x++) {
-      const v = data ? data[Math.floor(x / canvas.width * data.length)] : 0;
-      const y = canvas.height / 2 + v * canvas.height * 0.45;
-      x ? g.lineTo(x, y) : g.moveTo(x, y);
-    }
-    g.stroke();
-  }
-  line(null);
-})();
-</script>
 </body>
 </html>

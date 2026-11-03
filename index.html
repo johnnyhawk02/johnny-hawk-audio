@@ -58,8 +58,20 @@ h2 { font-size: clamp(30px, 5vw, 48px); letter-spacing: -.035em; line-height: 1.
 .product p.tag { color: var(--muted); font-size: 18px; margin: 14px 0 22px; max-width: 40ch; }
 .specs { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
 .specs li { display: grid; grid-template-columns: 130px 1fr; gap: 16px; padding: 14px 0; border-bottom: 1px solid var(--line); font-size: 15px; }
-.specs li span:first-child { font: 500 12px var(--mono); text-transform: uppercase; letter-spacing: .08em; color: var(--muted); padding-top: 2px; }
+.specs li > span:first-child { font: 500 12px var(--mono); text-transform: uppercase; letter-spacing: .08em; color: var(--muted); padding-top: 2px; }
 .specs .num { font-variant-numeric: tabular-nums; }
+.downloads { grid-column: 1 / -1; border: 1px solid var(--line); border-radius: 18px; background: var(--card); padding: 20px; display: flex; flex-direction: column; gap: 14px; }
+.dl-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+.dl-head strong { font-size: 17px; font-weight: 600; letter-spacing: -.01em; }
+.dl-head a { font-size: 14px; color: var(--muted); }
+.dl-row { display: grid; grid-template-columns: 130px 1fr; gap: 12px; align-items: center; border-top: 1px solid var(--line); padding-top: 14px; }
+.dl-row > span { font: 500 12px var(--mono); text-transform: uppercase; letter-spacing: .08em; color: var(--muted); }
+.dl-row > span small { display: block; text-transform: none; letter-spacing: 0; font-size: 11px; margin-top: 2px; }
+.dl-links { display: flex; gap: 8px; flex-wrap: wrap; }
+.dl-links a { font: 500 13px var(--sans); text-decoration: none; border: 1px solid var(--line); border-radius: 999px; padding: 7px 14px; }
+.dl-links a:hover { border-color: var(--fg); }
+.dl-note { margin: 0; font-size: 14px; color: var(--muted); }
+@media (max-width: 560px) { .dl-row { grid-template-columns: 1fr; gap: 8px; } }
 @media (max-width: 760px) { .product { grid-template-columns: 1fr; gap: 28px; } .specs li { grid-template-columns: 100px 1fr; } }
 
 .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px; margin-top: 28px; }
@@ -108,12 +120,12 @@ footer { border-top: 1px solid var(--line); padding-block: 28px 40px; }
 
   <section class="section gutter" id="elixir"><div class="inner product">
     <div>
-      <p class="eyebrow">Drum machine</p>
+      <p class="eyebrow">Drum machine · Plugin and browser</p>
       <h2>Elixir Desktop</h2>
-      <p class="tag">A six-voice drum machine in the browser. Its engine is a sample-exact JavaScript port of the LXR-02 drum firmware.</p>
+      <p class="tag">A six-voice drum machine built on the LXR-02 engine, with step sequencers on every control. Play it in the browser, or load it in your music software as a VST3, Audio Unit, CLAP or LV2 plugin. Free and open source.</p>
       <div class="ctas">
-        <a class="btn" href="https://johnnyhawk02.github.io/elixir-desktop/">Play it</a>
-        <a class="btn ghost" href="https://github.com/johnnyhawk02/elixir-desktop">Source</a>
+        <a class="btn" href="#elixir-download">Download v1.1.1</a>
+        <a class="btn ghost" href="https://johnnyhawk02.github.io/elixir-desktop/">Play in browser</a>
       </div>
     </div>
     <ul class="specs">
@@ -122,7 +134,18 @@ footer { border-top: 1px solid var(--line); padding-block: 28px 40px; }
       <li><span>FX bus</span><span>Distortion, ring mod, compressor, delay</span></li>
       <li><span>Routing</span><span><span class="num">6 × 6</span> crossfeed patchbay</span></li>
       <li><span>Accuracy</span><span><span class="num">176</span> million samples checked against the firmware, all identical</span></li>
+      <li><span>Formats</span><span>VST3, Audio Unit, CLAP, LV2 and a standalone app</span></li>
     </ul>
+    <div class="downloads" id="elixir-download">
+      <div class="dl-head"><strong>Download Elixir Desktop 1.1.1</strong><a href="https://github.com/johnnyhawk02/elixir-desktop-vst/blob/main/docs/DOWNLOADS.md">Install steps</a></div>
+      <div class="dl-row"><span>Mac<small>Apple Silicon + Intel, macOS 11+</small></span><div class="dl-links">
+        <a href="https://github.com/johnnyhawk02/elixir-desktop-vst/releases/latest/download/ElixirDesktop-mac-vst3.zip">VST3</a><a href="https://github.com/johnnyhawk02/elixir-desktop-vst/releases/latest/download/ElixirDesktop-mac-au.zip">Audio Unit</a><a href="https://github.com/johnnyhawk02/elixir-desktop-vst/releases/latest/download/ElixirDesktop-mac-clap.zip">CLAP</a><a href="https://github.com/johnnyhawk02/elixir-desktop-vst/releases/latest/download/ElixirDesktop-mac-standalone.zip">App</a></div></div>
+      <div class="dl-row"><span>Windows<small>10/11, 64-bit</small></span><div class="dl-links">
+        <a href="https://github.com/johnnyhawk02/elixir-desktop-vst/releases/latest/download/ElixirDesktop-windows-vst3.zip">VST3</a><a href="https://github.com/johnnyhawk02/elixir-desktop-vst/releases/latest/download/ElixirDesktop-windows-clap.zip">CLAP</a><a href="https://github.com/johnnyhawk02/elixir-desktop-vst/releases/latest/download/ElixirDesktop-windows-standalone.zip">App</a></div></div>
+      <div class="dl-row"><span>Linux<small>x86-64</small></span><div class="dl-links">
+        <a href="https://github.com/johnnyhawk02/elixir-desktop-vst/releases/latest/download/ElixirDesktop-linux-vst3.tar.gz">VST3</a><a href="https://github.com/johnnyhawk02/elixir-desktop-vst/releases/latest/download/ElixirDesktop-linux-clap.tar.gz">CLAP</a><a href="https://github.com/johnnyhawk02/elixir-desktop-vst/releases/latest/download/ElixirDesktop-linux-lv2.tar.gz">LV2</a><a href="https://github.com/johnnyhawk02/elixir-desktop-vst/releases/latest/download/ElixirDesktop-linux-standalone.tar.gz">App</a></div></div>
+      <p class="dl-note">The Mac version isn't signed by Apple, so macOS blocks it the first time. The install steps show the one Terminal line that fixes it.</p>
+    </div>
   </div></section>
 
   <section class="section gutter" id="elixir-synth"><div class="inner product">
@@ -170,6 +193,11 @@ footer { border-top: 1px solid var(--line); padding-block: 28px 40px; }
         <strong>elixir-desktop</strong>
         <p>The drum machine: engine, UI, kits and presets, published with GitHub Pages.</p>
         <div class="chips"><span class="chip">JavaScript</span><span class="chip">GPL-3.0</span></div>
+      </a>
+      <a class="card" href="https://github.com/johnnyhawk02/elixir-desktop-vst">
+        <strong>elixir-desktop-vst</strong>
+        <p>Elixir Desktop as a plugin: the engine ported to C++ and checked sample for sample against the app, built with JUCE.</p>
+        <div class="chips"><span class="chip">C++</span><span class="chip">GPL-3.0</span></div>
       </a>
       <a class="card" href="https://github.com/johnnyhawk02/elixir-synth">
         <strong>elixir-synth</strong>

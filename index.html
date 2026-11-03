@@ -31,7 +31,7 @@ a { color: inherit; }
 
 /* Nav */
 .top { border-bottom: 1px solid var(--line); }
-.nav { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 14px; }
+.nav { display: flex; align-items: center; justify-content: flex-end; gap: 16px; padding-block: 14px; }
 .logo { font-weight: 700; letter-spacing: -.02em; text-decoration: none; font-size: 17px; }
 .links { display: flex; align-items: center; gap: 20px; font-size: 14px; }
 .links a { text-decoration: none; color: var(--muted); }
@@ -43,8 +43,8 @@ a { color: inherit; }
 @media (max-width: 560px) { .links .hide-sm { display: none; } }
 
 /* Hero */
-.hero { padding-block: 56px 32px; display: flex; flex-direction: column; gap: 20px; }
-h1 { font-size: clamp(40px, 8vw, 84px); line-height: 1; letter-spacing: -.045em; font-weight: 600; margin: 0; max-width: 13ch; text-wrap: balance; }
+.hero { padding-block: 48px 40px; display: flex; flex-direction: column; gap: 20px; }
+h1 { font-size: clamp(40px, 8vw, 84px); line-height: 1; letter-spacing: -.045em; font-weight: 600; margin: 0; max-width: 16ch; text-wrap: balance; }
 .sub { font-size: clamp(17px, 2.2vw, 20px); color: var(--muted); max-width: 46ch; margin: 0; }
 .ctas { display: flex; gap: 10px; flex-wrap: wrap; }
 
@@ -60,6 +60,9 @@ h2 { font-size: clamp(30px, 5vw, 48px); letter-spacing: -.035em; line-height: 1.
 .specs li { display: grid; grid-template-columns: 130px 1fr; gap: 16px; padding: 14px 0; border-bottom: 1px solid var(--line); font-size: 15px; }
 .specs li > span:first-child { font: 500 12px var(--mono); text-transform: uppercase; letter-spacing: .08em; color: var(--muted); padding-top: 2px; }
 .specs .num { font-variant-numeric: tabular-nums; }
+.video { position: relative; aspect-ratio: 16 / 9; max-width: 100%; border-radius: 14px; overflow: hidden; background: var(--line); }
+.video iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+.video-link { margin: 10px 0 0; font-size: 14px; color: var(--muted); }
 .downloads { grid-column: 1 / -1; border: 1px solid var(--line); border-radius: 18px; background: var(--card); padding: 20px; display: flex; flex-direction: column; gap: 14px; }
 .dl-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap; }
 .dl-head strong { font-size: 17px; font-weight: 600; letter-spacing: -.01em; }
@@ -95,7 +98,6 @@ footer { border-top: 1px solid var(--line); padding-block: 28px 40px; }
 
 <div class="top gutter">
   <div class="inner nav">
-    <a class="logo" href="#top">Johnny Hawk Audio</a>
     <div class="links">
       <a href="#elixir" class="hide-sm">Elixir</a>
       <a href="#elixir-synth" class="hide-sm">Synth</a>
@@ -109,13 +111,7 @@ footer { border-top: 1px solid var(--line); padding-block: 28px 40px; }
 
 <main id="top">
   <div class="gutter"><div class="inner hero">
-    <h1>Instruments that run in your browser</h1>
-    <p class="sub">A drum machine and two synths built with web audio. Open a link and play. No install, no account.</p>
-    <div class="ctas">
-      <a class="btn" href="https://johnnyhawk02.github.io/elixir-desktop/">Open Elixir Desktop</a>
-      <a class="btn ghost" href="#elixir-synth">Elixir Synth</a>
-      <a class="btn ghost" href="#tb303">TB-303 Circuit Model</a>
-    </div>
+    <h1>Johnny Hawk Audio</h1>
   </div></div>
 
   <section class="section gutter" id="elixir"><div class="inner product">
@@ -172,9 +168,8 @@ footer { border-top: 1px solid var(--line); padding-block: 28px 40px; }
       <p class="eyebrow">Bass synth · circuit model</p>
       <h2>TB-303 Circuit Model</h2>
       <p class="tag">A bass synth in your browser that recreates the Roland TB-303 part by part. Instead of imitating the sound, it models the real circuit, including the resistors, capacitors and the famous filter, so every knob behaves like the original hardware. Generate fresh acid lines from classic pattern material, build a &ldquo;new unit&rdquo; within factory tolerances or a messed-up one, and run it through a RAT distortion and Lexicon 224-style reverb. It works offline and on your phone.</p>
-      <div class="ctas">
-        <a class="btn" href="https://tb303-circuit-model.pages.dev/">Play it</a>
-      </div>
+      <div class="video"><iframe src="https://www.youtube-nocookie.com/embed/KvPnbSF_k-0" title="TB-303 Circuit Model video" loading="lazy" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture; fullscreen" allowfullscreen></iframe></div>
+      <p class="video-link"><a href="https://www.youtube.com/watch?v=KvPnbSF_k-0">Watch on YouTube</a></p>
     </div>
     <ul class="specs">
       <li><span>Pitch</span><span><span class="num">6</span>-bit R-2R ladder, <span class="num">1/12</span> V per step</span></li>

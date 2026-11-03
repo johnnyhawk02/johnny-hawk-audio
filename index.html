@@ -73,7 +73,16 @@ h2 { font-size: clamp(30px, 5vw, 48px); letter-spacing: -.035em; line-height: 1.
 .dl-links { display: flex; gap: 8px; flex-wrap: wrap; }
 .dl-links a { font: 500 13px var(--sans); text-decoration: none; border: 1px solid var(--line); border-radius: 999px; padding: 7px 14px; }
 .dl-links a:hover { border-color: var(--fg); }
-.dl-note { margin: 0; font-size: 14px; color: var(--muted); }
+.dl-row { align-items: start; }
+.dl-row > span { padding-top: 4px; }
+.mac-col { display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+.mac-install { display: flex; flex-direction: column; gap: 10px; }
+.mac-install p, .dl-sub { margin: 0; font-size: 14px; color: var(--muted); max-width: 62ch; }
+.dl-sub a { color: inherit; }
+.cmd { display: flex; align-items: stretch; border: 1px solid var(--line); border-radius: 12px; overflow: hidden; background: var(--bg); min-width: 0; }
+.cmd code { flex: 1; min-width: 0; font: 400 12.5px/1.5 var(--mono); padding: 10px 12px; overflow-x: auto; white-space: nowrap; }
+.copy { flex: none; font: 500 13px var(--sans); border: 0; border-left: 1px solid var(--line); background: var(--fg); color: var(--bg); padding: 0 16px; cursor: pointer; }
+.copy:hover { opacity: .88; }
 @media (max-width: 560px) { .dl-row { grid-template-columns: 1fr; gap: 8px; } }
 @media (max-width: 760px) { .product { grid-template-columns: 1fr; gap: 28px; } .specs li { grid-template-columns: 100px 1fr; } }
 
@@ -134,13 +143,19 @@ footer { border-top: 1px solid var(--line); padding-block: 28px 40px; }
     </ul>
     <div class="downloads" id="elixir-download">
       <div class="dl-head"><strong>Download Elixir Desktop 1.1.1</strong><a href="https://github.com/johnnyhawk02/elixir-desktop-vst/blob/main/docs/DOWNLOADS.md">Install steps</a></div>
-      <div class="dl-row"><span>Mac<small>Apple Silicon + Intel, macOS 11+</small></span><div class="dl-links">
-        <a href="https://github.com/johnnyhawk02/elixir-desktop-vst/releases/latest/download/ElixirDesktop-mac-vst3.zip">VST3</a><a href="https://github.com/johnnyhawk02/elixir-desktop-vst/releases/latest/download/ElixirDesktop-mac-au.zip">Audio Unit</a><a href="https://github.com/johnnyhawk02/elixir-desktop-vst/releases/latest/download/ElixirDesktop-mac-clap.zip">CLAP</a><a href="https://github.com/johnnyhawk02/elixir-desktop-vst/releases/latest/download/ElixirDesktop-mac-standalone.zip">App</a></div></div>
+      <div class="dl-row"><span>Mac<small>Apple Silicon + Intel, macOS 11+</small></span><div class="mac-col">
+        <div class="mac-install">
+          <p>Elixir is free, and I can&rsquo;t afford Apple&rsquo;s developer fee, so the Mac version isn&rsquo;t signed. If you download it in your browser, macOS will block it. The easy way: paste this into Terminal. It installs the VST3, Audio Unit, CLAP and app, and macOS won&rsquo;t complain.</p>
+          <div class="cmd"><code id="mac-cmd">curl -fsSL https://raw.githubusercontent.com/johnnyhawk02/elixir-desktop-vst/main/install-mac.sh | bash</code><button type="button" id="copy-mac" class="copy">Copy</button></div>
+        </div>
+        <p class="dl-sub">Or download one by hand (<a href="https://github.com/johnnyhawk02/elixir-desktop-vst/blob/main/docs/DOWNLOADS.md#install-on-mac">manual steps</a>):</p>
+        <div class="dl-links">
+        <a href="https://github.com/johnnyhawk02/elixir-desktop-vst/releases/latest/download/ElixirDesktop-mac-vst3.zip">VST3</a><a href="https://github.com/johnnyhawk02/elixir-desktop-vst/releases/latest/download/ElixirDesktop-mac-au.zip">Audio Unit</a><a href="https://github.com/johnnyhawk02/elixir-desktop-vst/releases/latest/download/ElixirDesktop-mac-clap.zip">CLAP</a><a href="https://github.com/johnnyhawk02/elixir-desktop-vst/releases/latest/download/ElixirDesktop-mac-standalone.zip">App</a></div>
+      </div></div>
       <div class="dl-row"><span>Windows<small>10/11, 64-bit</small></span><div class="dl-links">
         <a href="https://github.com/johnnyhawk02/elixir-desktop-vst/releases/latest/download/ElixirDesktop-windows-vst3.zip">VST3</a><a href="https://github.com/johnnyhawk02/elixir-desktop-vst/releases/latest/download/ElixirDesktop-windows-clap.zip">CLAP</a><a href="https://github.com/johnnyhawk02/elixir-desktop-vst/releases/latest/download/ElixirDesktop-windows-standalone.zip">App</a></div></div>
       <div class="dl-row"><span>Linux<small>x86-64</small></span><div class="dl-links">
         <a href="https://github.com/johnnyhawk02/elixir-desktop-vst/releases/latest/download/ElixirDesktop-linux-vst3.tar.gz">VST3</a><a href="https://github.com/johnnyhawk02/elixir-desktop-vst/releases/latest/download/ElixirDesktop-linux-clap.tar.gz">CLAP</a><a href="https://github.com/johnnyhawk02/elixir-desktop-vst/releases/latest/download/ElixirDesktop-linux-lv2.tar.gz">LV2</a><a href="https://github.com/johnnyhawk02/elixir-desktop-vst/releases/latest/download/ElixirDesktop-linux-standalone.tar.gz">App</a></div></div>
-      <p class="dl-note">The Mac version isn't signed by Apple, so macOS blocks it the first time. The install steps show the one Terminal line that fixes it.</p>
     </div>
   </div></section>
 
@@ -208,6 +223,15 @@ footer { border-top: 1px solid var(--line); padding-block: 28px 40px; }
   <a href="https://github.com/johnnyhawk02">github.com/johnnyhawk02</a>
   <span class="ok">Engine verified against firmware</span>
 </div></footer>
+
+<script>
+document.getElementById("copy-mac").addEventListener("click", function () {
+  var btn = this, code = document.getElementById("mac-cmd");
+  function done() { btn.textContent = "Copied"; setTimeout(function () { btn.textContent = "Copy"; }, 1600); }
+  function fallback() { var r = document.createRange(); r.selectNodeContents(code); var sel = getSelection(); sel.removeAllRanges(); sel.addRange(r); btn.textContent = "Press ⌘C"; }
+  if (navigator.clipboard) navigator.clipboard.writeText(code.textContent).then(done, fallback); else fallback();
+});
+</script>
 
 </body>
 </html>

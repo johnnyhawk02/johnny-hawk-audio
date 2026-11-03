@@ -83,6 +83,9 @@ h2 { font-size: clamp(30px, 5vw, 48px); letter-spacing: -.035em; line-height: 1.
 .cmd code { flex: 1; min-width: 0; font: 400 12.5px/1.5 var(--mono); padding: 10px 12px; overflow-x: auto; white-space: nowrap; }
 .copy { flex: none; font: 500 13px var(--sans); border: 0; border-left: 1px solid var(--line); background: var(--fg); color: var(--bg); padding: 0 16px; cursor: pointer; }
 .copy:hover { opacity: .88; }
+.steps { margin: 0; padding-left: 22px; display: flex; flex-direction: column; gap: 6px; font-size: 14px; max-width: 62ch; }
+.steps b { font-weight: 600; }
+kbd { font: 500 12px var(--mono); border: 1px solid var(--line); border-bottom-width: 2px; border-radius: 5px; padding: 1px 5px; background: var(--bg); }
 @media (max-width: 560px) { .dl-row { grid-template-columns: 1fr; gap: 8px; } }
 @media (max-width: 760px) { .product { grid-template-columns: 1fr; gap: 28px; } .specs li { grid-template-columns: 100px 1fr; } }
 
@@ -145,8 +148,15 @@ footer { border-top: 1px solid var(--line); padding-block: 28px 40px; }
       <div class="dl-head"><strong>Download Elixir Desktop 1.1.1</strong><a href="https://github.com/johnnyhawk02/elixir-desktop-vst/blob/main/docs/DOWNLOADS.md">Install steps</a></div>
       <div class="dl-row"><span>Mac<small>Apple Silicon + Intel, macOS 11+</small></span><div class="mac-col">
         <div class="mac-install">
-          <p>Elixir is free, and I can&rsquo;t afford Apple&rsquo;s developer fee, so the Mac version isn&rsquo;t signed. If you download it in your browser, macOS will block it. The easy way: paste this into Terminal. It installs the VST3, Audio Unit, CLAP and app, and macOS won&rsquo;t complain.</p>
+          <p>Elixir is free, and I can&rsquo;t afford Apple&rsquo;s developer fee, so the Mac version isn&rsquo;t signed. If you download it in your browser, macOS will block it. This one command installs the VST3, Audio Unit, CLAP and app so macOS won&rsquo;t complain:</p>
           <div class="cmd"><code id="mac-cmd">curl -fsSL https://raw.githubusercontent.com/johnnyhawk02/elixir-desktop-vst/main/install-mac.sh | bash</code><button type="button" id="copy-mac" class="copy">Copy</button></div>
+          <ol class="steps">
+            <li>Press <kbd>⌘</kbd> + <kbd>Space</kbd>, type <b>Terminal</b> and press <kbd>Return</kbd>. A window with text opens.</li>
+            <li>Click <b>Copy</b> above.</li>
+            <li>Click inside the Terminal window, press <kbd>⌘</kbd> + <kbd>V</kbd> to paste, then press <kbd>Return</kbd>.</li>
+            <li>Wait until it says <b>Done</b>. It takes about a minute.</li>
+            <li>Restart your music software and rescan plugins. The app is in your Applications folder.</li>
+          </ol>
         </div>
         <p class="dl-sub">Or download one by hand (<a href="https://github.com/johnnyhawk02/elixir-desktop-vst/blob/main/docs/DOWNLOADS.md#install-on-mac">manual steps</a>):</p>
         <div class="dl-links">

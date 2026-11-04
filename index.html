@@ -63,6 +63,9 @@ h2 { font-size: clamp(30px, 5vw, 48px); letter-spacing: -.035em; line-height: 1.
 .cta-note { margin: 12px 0 0; font-size: 14px; color: var(--muted); }
 .video { position: relative; aspect-ratio: 16 / 9; max-width: 100%; border-radius: 14px; overflow: hidden; background: var(--line); }
 .video iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+.badge { display: inline-block; margin: 14px 0 0; padding: 4px 10px; border: 1px solid var(--line); border-radius: 999px; font: 500 12px var(--mono); color: var(--muted); }
+.product .badge + p.tag { margin-top: 12px; }
+#tb303 .ctas { margin-bottom: 22px; }
 .video-link { margin: 10px 0 0; font-size: 14px; color: var(--muted); }
 .downloads { grid-column: 1 / -1; border: 1px solid var(--line); border-radius: 18px; background: var(--card); padding: 20px; display: flex; flex-direction: column; gap: 14px; }
 .dl-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap; }
@@ -115,9 +118,9 @@ footer { border-top: 1px solid var(--line); padding-block: 28px 40px; }
 <div class="top gutter">
   <div class="inner nav">
     <div class="links">
+      <a href="#tb303" class="hide-sm">303</a>
       <a href="#elixir" class="hide-sm">Elixir</a>
       <a href="#elixir-synth" class="hide-sm">Synth</a>
-      <a href="#tb303" class="hide-sm">303</a>
       <a href="#open-source" class="hide-sm">Open source</a>
       <a href="https://github.com/johnnyhawk02">GitHub</a>
       <a class="btn" href="https://johnnyhawk02.github.io/elixir-desktop/">Play Elixir</a>
@@ -129,6 +132,28 @@ footer { border-top: 1px solid var(--line); padding-block: 28px 40px; }
   <div class="gutter"><div class="inner hero">
     <h1>Johnny Hawk Audio</h1>
   </div></div>
+
+  <section class="section gutter" id="tb303"><div class="inner product">
+    <div>
+      <p class="eyebrow">Bass synth · circuit model</p>
+      <h2>TB-303 Circuit Model</h2>
+      <p class="badge">Early taster, work in progress, expect changes</p>
+      <p class="tag">A TB-303 rebuilt component by component from the original schematic, running free in the browser. It has TD-3-MO-style key tracking, RAT drive, delay, a compactor, four reverbs (224, Plate, Spring, Convolution) and a 64-step sequencer. Built with Claude Code.</p>
+      <div class="ctas">
+        <a class="btn" href="https://tb303-circuit-model.pages.dev" target="_blank" rel="noopener">Open the app</a>
+      </div>
+      <div class="video"><iframe src="https://www.youtube-nocookie.com/embed/lbUobvWWS9k" title="TB-303 Circuit Model demo" loading="lazy" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture; fullscreen" allowfullscreen></iframe></div>
+      <p class="video-link"><a href="https://www.youtube.com/watch?v=lbUobvWWS9k" target="_blank" rel="noopener">Watch the demo on YouTube</a></p>
+    </div>
+    <ul class="specs">
+      <li><span>Build</span><span>Component by component from the original schematic</span></li>
+      <li><span>Filter</span><span><span class="num">4</span>-pole transistor/diode ladder, <span class="num">2×</span> oversampled</span></li>
+      <li><span>Tracking</span><span>TD-3-MO-style key tracking</span></li>
+      <li><span>Effects</span><span>RAT drive, delay and a compactor</span></li>
+      <li><span>Reverbs</span><span><span class="num">4</span>: 224, Plate, Spring, Convolution</span></li>
+      <li><span>Sequencer</span><span><span class="num">64</span> steps</span></li>
+    </ul>
+  </div></section>
 
   <section class="section gutter" id="elixir"><div class="inner product">
     <div>
@@ -196,22 +221,6 @@ footer { border-top: 1px solid var(--line); padding-block: 28px 40px; }
     </ul>
   </div></section>
 
-  <section class="section gutter" id="tb303"><div class="inner product">
-    <div>
-      <p class="eyebrow">Bass synth · circuit model</p>
-      <h2>TB-303 Circuit Model</h2>
-      <p class="tag">A bass synth in your browser that recreates the Roland TB-303 part by part. Instead of imitating the sound, it models the real circuit, including the resistors, capacitors and the famous filter, so every knob behaves like the original hardware. Generate fresh acid lines from classic pattern material, build a &ldquo;new unit&rdquo; within factory tolerances or a messed-up one, and run it through a RAT distortion and Lexicon 224-style reverb. It works offline and on your phone.</p>
-      <div class="video"><iframe src="https://www.youtube-nocookie.com/embed/KvPnbSF_k-0" title="TB-303 Circuit Model video" loading="lazy" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture; fullscreen" allowfullscreen></iframe></div>
-      <p class="video-link"><a href="https://www.youtube.com/watch?v=KvPnbSF_k-0">Watch on YouTube</a></p>
-    </div>
-    <ul class="specs">
-      <li><span>Pitch</span><span><span class="num">6</span>-bit R-2R ladder, <span class="num">1/12</span> V per step</span></li>
-      <li><span>Filter</span><span><span class="num">4</span>-pole transistor/diode ladder, <span class="num">2×</span> oversampled</span></li>
-      <li><span>Effects</span><span>RAT distortion and a Lexicon 224 reverb, both modelled from their parts</span></li>
-      <li><span>Patterns</span><span>Fresh acid lines generated from classic pattern material</span></li>
-      <li><span>Units</span><span>A new unit within factory tolerances, or a messed-up one</span></li>
-    </ul>
-  </div></section>
 
   <section class="section gutter" id="open-source"><div class="inner">
     <p class="eyebrow">Open source</p>

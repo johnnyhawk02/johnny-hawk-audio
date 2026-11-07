@@ -6,7 +6,7 @@
 <title>Johnny Hawk Audio</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap">
 <style>
-/* Layout: maker-hardware landing page. Nav with pill CTA, plain big hero, product block with spec list, open-source cards, quiet footer. */
+/* Layout: plain big title, then one card per product (title, blurb, Play, Install), quiet footer. */
 :root {
   --bg: #fafaf9;
   --fg: #0c0d0e;
@@ -43,73 +43,23 @@ a { color: inherit; }
 @media (max-width: 560px) { .links .hide-sm { display: none; } }
 
 /* Hero */
-.hero { padding-block: 48px 40px; display: flex; flex-direction: column; gap: 20px; }
+.hero { padding-block: 48px 40px; }
 h1 { font-size: clamp(40px, 8vw, 84px); line-height: 1; letter-spacing: -.045em; font-weight: 600; margin: 0; max-width: 16ch; text-wrap: balance; }
-.sub { font-size: clamp(17px, 2.2vw, 20px); color: var(--muted); max-width: 46ch; margin: 0; }
-.ctas { display: flex; gap: 10px; flex-wrap: wrap; }
 
-
-/* Sections */
-.section { border-top: 1px solid var(--line); padding-block: 64px; }
-.eyebrow { font: 500 12px var(--mono); text-transform: uppercase; letter-spacing: .1em; color: var(--muted); margin: 0 0 12px; }
-h2 { font-size: clamp(30px, 5vw, 48px); letter-spacing: -.035em; line-height: 1.05; font-weight: 600; margin: 0; text-wrap: balance; }
-.product { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; }
-.product > * { min-width: 0; }
-.product p.tag { color: var(--muted); font-size: 18px; margin: 14px 0 22px; max-width: 40ch; }
-.specs { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
-.specs li { display: grid; grid-template-columns: 130px 1fr; gap: 16px; padding: 14px 0; border-bottom: 1px solid var(--line); font-size: 15px; }
-.specs li > span:first-child { font: 500 12px var(--mono); text-transform: uppercase; letter-spacing: .08em; color: var(--muted); padding-top: 2px; }
-.specs .num { font-variant-numeric: tabular-nums; }
-.cta-note { margin: 12px 0 0; font-size: 14px; color: var(--muted); }
-.video { position: relative; aspect-ratio: 16 / 9; max-width: 100%; border-radius: 14px; overflow: hidden; background: var(--line); }
-.video iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
-.badge { display: inline-block; margin: 14px 0 0; padding: 4px 10px; border: 1px solid var(--line); border-radius: 999px; font: 500 12px var(--mono); color: var(--muted); }
-.product .badge + p.tag { margin-top: 12px; }
-#tb303 .ctas { margin-bottom: 22px; }
-.video-link { margin: 10px 0 0; font-size: 14px; color: var(--muted); }
-.downloads { grid-column: 1 / -1; border: 1px solid var(--line); border-radius: 18px; background: var(--card); padding: 20px; display: flex; flex-direction: column; gap: 14px; }
-.dl-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap; }
-.dl-head strong { font-size: 17px; font-weight: 600; letter-spacing: -.01em; }
-.dl-head a { font-size: 14px; color: var(--muted); }
-.dl-row { display: grid; grid-template-columns: 130px 1fr; gap: 12px; align-items: center; border-top: 1px solid var(--line); padding-top: 14px; }
-.dl-row > span { font: 500 12px var(--mono); text-transform: uppercase; letter-spacing: .08em; color: var(--muted); }
-.dl-row > span small { display: block; text-transform: none; letter-spacing: 0; font-size: 11px; margin-top: 2px; }
-.dl-links { display: flex; gap: 8px; flex-wrap: wrap; }
-.dl-links a { font: 500 13px var(--sans); text-decoration: none; border: 1px solid var(--line); border-radius: 999px; padding: 7px 14px; }
-.dl-links a:hover { border-color: var(--fg); }
-.dl-row { align-items: start; }
-.dl-row > span { padding-top: 4px; }
-.mac-col { display: flex; flex-direction: column; gap: 10px; min-width: 0; }
-.mac-install { display: flex; flex-direction: column; gap: 10px; }
-.mac-install p, .dl-sub { margin: 0; font-size: 14px; color: var(--muted); max-width: 62ch; }
-.dl-sub a { color: inherit; }
-.cmd { display: flex; align-items: stretch; border: 1px solid var(--line); border-radius: 12px; overflow: hidden; background: var(--bg); min-width: 0; }
-.cmd code { flex: 1; min-width: 0; font: 400 12.5px/1.5 var(--mono); padding: 10px 12px; overflow-x: auto; white-space: nowrap; }
-.copy { flex: none; font: 500 13px var(--sans); border: 0; border-left: 1px solid var(--line); background: var(--fg); color: var(--bg); padding: 0 16px; cursor: pointer; }
-.copy:hover { opacity: .88; }
-.pick { display: flex; flex-wrap: wrap; gap: 6px; }
-.pick button { font: 500 13px var(--sans); border: 1px solid var(--line); background: transparent; color: var(--fg); border-radius: 999px; padding: 6px 12px; cursor: pointer; }
-.pick button[aria-pressed=true] { background: var(--fg); color: var(--bg); border-color: var(--fg); }
-.steps { margin: 0; padding-left: 22px; display: flex; flex-direction: column; gap: 6px; font-size: 14px; max-width: 62ch; }
-.steps b { font-weight: 600; }
-kbd { font: 500 12px var(--mono); border: 1px solid var(--line); border-bottom-width: 2px; border-radius: 5px; padding: 1px 5px; background: var(--bg); }
-@media (max-width: 560px) { .dl-row { grid-template-columns: 1fr; gap: 8px; } }
-@media (max-width: 760px) { .product { grid-template-columns: 1fr; gap: 28px; } .specs li { grid-template-columns: 100px 1fr; } }
-
-.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px; margin-top: 28px; }
-.card { background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 20px; text-decoration: none; display: flex; flex-direction: column; gap: 8px; min-width: 0; }
-.card:hover { border-color: var(--muted); }
-.card strong { font-size: 17px; font-weight: 600; letter-spacing: -.01em; }
-.card p { margin: 0; color: var(--muted); font-size: 15px; }
-.chips { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 6px; }
-.chip { font: 500 11px var(--mono); text-transform: uppercase; letter-spacing: .06em; border: 1px solid var(--line); border-radius: 999px; padding: 3px 9px; color: var(--muted); }
+/* Products */
+.section { border-top: 1px solid var(--line); padding-block: 48px 64px; }
+.eyebrow { font: 500 12px var(--mono); text-transform: uppercase; letter-spacing: .1em; color: var(--muted); margin: 0; }
+.products { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 12px; }
+.product { background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 24px; display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+.product h2 { font-size: clamp(24px, 3vw, 28px); letter-spacing: -.03em; line-height: 1.1; font-weight: 600; margin: 0; text-wrap: balance; }
+.product p.tag { color: var(--muted); font-size: 15px; margin: 0; flex: 1; }
+.badge { align-self: flex-start; margin: 0; padding: 3px 9px; border: 1px solid var(--line); border-radius: 999px; font: 500 11px var(--mono); color: var(--muted); }
+.ctas { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 8px; }
 
 footer { border-top: 1px solid var(--line); padding-block: 28px 40px; }
 .foot { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; font-size: 14px; color: var(--muted); }
 .foot a { text-decoration: none; }
 .foot a:hover { color: var(--fg); }
-.ok { font: 500 12px var(--mono); }
-.ok::before { content: ""; display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: #22a55b; margin-right: 8px; vertical-align: 1px; }
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
 </style>
 </head>
@@ -118,12 +68,7 @@ footer { border-top: 1px solid var(--line); padding-block: 28px 40px; }
 <div class="top gutter">
   <div class="inner nav">
     <div class="links">
-      <a href="#tb303" class="hide-sm">TB-303</a>
-      <a href="#elixir" class="hide-sm">Elixir</a>
-      <a href="#elixir-synth" class="hide-sm">Synth</a>
-      <a href="#open-source" class="hide-sm">Open source</a>
       <a href="https://github.com/johnnyhawk02">GitHub</a>
-      <a class="btn" href="https://johnnyhawk02.github.io/elixir-desktop/">Play Elixir</a>
     </div>
   </div>
 </div>
@@ -133,144 +78,43 @@ footer { border-top: 1px solid var(--line); padding-block: 28px 40px; }
     <h1>Johnny Hawk Audio</h1>
   </div></div>
 
-  <section class="section gutter" id="tb303"><div class="inner product">
-    <div>
-      <p class="eyebrow">Bass synth · circuit model</p>
+  <section class="section gutter"><div class="inner products">
+    <article class="product" id="tb303">
+      <p class="eyebrow">Bass synth · plug-in and browser</p>
       <h2>Bass Guitar Emulator. Circuit Model</h2>
-      <p class="badge">Early taster, work in progress, expect changes</p>
-      <p class="tag">A TB-303 rebuilt component by component from the original schematic, running free in the browser. It has TD-3-MO-style key tracking, RAT drive, delay, a compactor, four reverbs (224, Plate, Spring, Convolution) and a 64-step sequencer. Built with Claude Code.</p>
+      <p class="badge">Early taster, work in progress</p>
+      <p class="tag">A TB-303 rebuilt component by component from the original schematic, with drive, delay, four reverbs and a 64-step sequencer.</p>
       <div class="ctas">
-        <a class="btn" href="https://tb303-circuit-model.pages.dev" target="_blank" rel="noopener">Open the app</a>
-        <a class="btn ghost" href="/303/install/">Install the plug-in</a>
+        <a class="btn" href="https://tb303-circuit-model.pages.dev" target="_blank" rel="noopener">Play</a>
+        <a class="btn ghost" href="/303/install/">Install</a>
       </div>
-      <div class="video"><iframe src="https://www.youtube-nocookie.com/embed/lbUobvWWS9k" title="Bass Guitar Emulator. Circuit Model demo" loading="lazy" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture; fullscreen" allowfullscreen></iframe></div>
-      <p class="video-link"><a href="https://www.youtube.com/watch?v=lbUobvWWS9k" target="_blank" rel="noopener">Watch the demo on YouTube</a></p>
-    </div>
-    <ul class="specs">
-      <li><span>Build</span><span>Component by component from the original schematic</span></li>
-      <li><span>Filter</span><span><span class="num">4</span>-pole transistor/diode ladder, <span class="num">2×</span> oversampled</span></li>
-      <li><span>Tracking</span><span>TD-3-MO-style key tracking</span></li>
-      <li><span>Effects</span><span>RAT drive, delay and a compactor</span></li>
-      <li><span>Reverbs</span><span><span class="num">4</span>: 224, Plate, Spring, Convolution</span></li>
-      <li><span>Sequencer</span><span><span class="num">64</span> steps</span></li>
-    </ul>
-  </div></section>
+    </article>
 
-  <section class="section gutter" id="elixir"><div class="inner product">
-    <div>
-      <p class="eyebrow">Drum machine · Plugin and browser</p>
+    <article class="product" id="elixir">
+      <p class="eyebrow">Drum machine · plug-in and browser</p>
       <h2>Elixir Desktop</h2>
-      <p class="tag">A six-voice drum machine built on the LXR-02 engine, with step sequencers on every control. Play it in the browser, or load it in your music software as a VST3, Audio Unit, CLAP or LV2 plugin. Free and open source.</p>
+      <p class="tag">A six-voice drum machine built on the LXR-02 engine, with step sequencers on every control. VST3, AU, CLAP and LV2. Free and open source.</p>
       <div class="ctas">
-        <a class="btn" href="#elixir-download">Download v1.1.1</a>
-        <a class="btn ghost" href="https://johnnyhawk02.github.io/elixir-desktop/">Play in browser</a>
+        <a class="btn" href="https://johnnyhawk02.github.io/elixir-desktop/">Play</a>
+        <a class="btn ghost" href="/elixir/install/">Install</a>
       </div>
-      <p class="cta-note">The browser version is for desktop computers only. It doesn&rsquo;t work on phones or tablets.</p>
-    </div>
-    <ul class="specs">
-      <li><span>Voices</span><span><span class="num">6</span>: three drum/tom, snare/clap, cymbal, hi-hat</span></li>
-      <li><span>Kits</span><span><span class="num">28</span> bundled, plus any LXR <code>.SND</code> file</span></li>
-      <li><span>FX bus</span><span>Distortion, ring mod, compressor, delay</span></li>
-      <li><span>Routing</span><span><span class="num">6 × 6</span> crossfeed patchbay</span></li>
-      <li><span>Accuracy</span><span><span class="num">176</span> million samples checked against the firmware, all identical</span></li>
-      <li><span>Formats</span><span>VST3, Audio Unit, CLAP, LV2 and a standalone app</span></li>
-    </ul>
-    <div class="downloads" id="elixir-download">
-      <div class="dl-head"><strong>Download Elixir Desktop 1.1.1</strong><a href="https://github.com/johnnyhawk02/elixir-desktop-vst/blob/main/docs/DOWNLOADS.md">Install steps</a></div>
-      <div class="dl-row"><span>Mac<small>Apple Silicon + Intel, macOS 11+</small></span><div class="mac-col">
-        <div class="mac-install">
-          <p>Elixir is free, and I don&rsquo;t have an Apple Developer account, so the Mac version isn&rsquo;t signed. If you download it in your browser, macOS will block it. This one command installs it so macOS won&rsquo;t complain. Pick what you want:</p>
-          <div class="pick" role="group" aria-label="What to install">
-            <button type="button" id="pick-all" data-f="" aria-pressed="true">Everything</button><button type="button" id="pick-vst3" data-f="vst3" aria-pressed="false">VST3</button><button type="button" id="pick-au" data-f="au" aria-pressed="false">Audio Unit</button><button type="button" id="pick-clap" data-f="clap" aria-pressed="false">CLAP</button><button type="button" id="pick-app" data-f="app" aria-pressed="false">App</button>
-          </div>
-          <div class="cmd"><code id="mac-cmd">curl -fsSL https://raw.githubusercontent.com/johnnyhawk02/elixir-desktop-vst/main/install-mac.sh | bash</code><button type="button" id="copy-mac" class="copy">Copy</button></div>
-          <ol class="steps">
-            <li>Press <kbd>⌘</kbd> + <kbd>Space</kbd>, type <b>Terminal</b> and press <kbd>Return</kbd>. A window with text opens.</li>
-            <li>Click <b>Copy</b> above.</li>
-            <li>Click inside the Terminal window, press <kbd>⌘</kbd> + <kbd>V</kbd> to paste, then press <kbd>Return</kbd>.</li>
-            <li>Wait until it says <b>Done</b>. It takes about a minute.</li>
-            <li>Restart your music software and rescan plugins. The app is in your Applications folder.</li>
-          </ol>
-        </div>
-        <p class="dl-sub">Or download one by hand (<a href="https://github.com/johnnyhawk02/elixir-desktop-vst/blob/main/docs/DOWNLOADS.md#install-on-mac">manual steps</a>):</p>
-        <div class="dl-links">
-        <a href="https://github.com/johnnyhawk02/elixir-desktop-vst/releases/latest/download/ElixirDesktop-mac-vst3.zip">VST3</a><a href="https://github.com/johnnyhawk02/elixir-desktop-vst/releases/latest/download/ElixirDesktop-mac-au.zip">Audio Unit</a><a href="https://github.com/johnnyhawk02/elixir-desktop-vst/releases/latest/download/ElixirDesktop-mac-clap.zip">CLAP</a><a href="https://github.com/johnnyhawk02/elixir-desktop-vst/releases/latest/download/ElixirDesktop-mac-standalone.zip">App</a></div>
-      </div></div>
-      <div class="dl-row"><span>Windows<small>10/11, 64-bit</small></span><div class="dl-links">
-        <a href="https://github.com/johnnyhawk02/elixir-desktop-vst/releases/latest/download/ElixirDesktop-windows-vst3.zip">VST3</a><a href="https://github.com/johnnyhawk02/elixir-desktop-vst/releases/latest/download/ElixirDesktop-windows-clap.zip">CLAP</a><a href="https://github.com/johnnyhawk02/elixir-desktop-vst/releases/latest/download/ElixirDesktop-windows-standalone.zip">App</a></div></div>
-      <div class="dl-row"><span>Linux<small>x86-64</small></span><div class="dl-links">
-        <a href="https://github.com/johnnyhawk02/elixir-desktop-vst/releases/latest/download/ElixirDesktop-linux-vst3.tar.gz">VST3</a><a href="https://github.com/johnnyhawk02/elixir-desktop-vst/releases/latest/download/ElixirDesktop-linux-clap.tar.gz">CLAP</a><a href="https://github.com/johnnyhawk02/elixir-desktop-vst/releases/latest/download/ElixirDesktop-linux-lv2.tar.gz">LV2</a><a href="https://github.com/johnnyhawk02/elixir-desktop-vst/releases/latest/download/ElixirDesktop-linux-standalone.tar.gz">App</a></div></div>
-    </div>
-  </div></section>
+    </article>
 
-  <section class="section gutter" id="elixir-synth"><div class="inner product">
-    <div>
-      <p class="eyebrow">Mono synth · VST3 prototype</p>
+    <article class="product" id="elixir-synth">
+      <p class="eyebrow">Mono synth · browser</p>
       <h2>Elixir Synth</h2>
-      <p class="tag">One voice of the Elixir engine played as a synth, with a note sequencer and an LCD screen. It is laid out as the prototype of a VST3 plugin, and it installs as an app that works offline.</p>
+      <p class="tag">One voice of the Elixir engine played as a synth, with a note sequencer and an LCD screen. Works offline once opened.</p>
       <div class="ctas">
-        <a class="btn" href="https://johnnyhawk02.github.io/elixir-synth/">Play it</a>
-        <a class="btn ghost" href="https://github.com/johnnyhawk02/elixir-synth">Source</a>
+        <a class="btn" href="https://johnnyhawk02.github.io/elixir-synth/">Play</a>
       </div>
-    </div>
-    <ul class="specs">
-      <li><span>Voice</span><span>LXR drum 1 (DR1), every parameter on four tabs</span></li>
-      <li><span>Sequencer</span><span><span class="num">4</span> pages of <span class="num">16</span> steps with gate, accent and slide</span></li>
-      <li><span>Random</span><span><span class="num">10</span> algorithms, from dice and acid to euclid and arp</span></li>
-      <li><span>FX</span><span>Echo, reverb, ring mod, then distortion and compressor on the mix</span></li>
-      <li><span>MIDI</span><span>CC <span class="num">1</span> to <span class="num">8</span> turn the eight performance dials</span></li>
-    </ul>
-  </div></section>
-
-
-  <section class="section gutter" id="open-source"><div class="inner">
-    <p class="eyebrow">Open source</p>
-    <h2>Read the code, fork it, change it</h2>
-    <div class="cards">
-      <a class="card" href="https://github.com/johnnyhawk02/elixir-desktop">
-        <strong>elixir-desktop</strong>
-        <p>The drum machine: engine, UI, kits and presets, published with GitHub Pages.</p>
-        <div class="chips"><span class="chip">JavaScript</span><span class="chip">GPL-3.0</span></div>
-      </a>
-      <a class="card" href="https://github.com/johnnyhawk02/elixir-desktop-vst">
-        <strong>elixir-desktop-vst</strong>
-        <p>Elixir Desktop as a plugin: the engine ported to C++ and checked sample for sample against the app, built with JUCE.</p>
-        <div class="chips"><span class="chip">C++</span><span class="chip">GPL-3.0</span></div>
-      </a>
-      <a class="card" href="https://github.com/johnnyhawk02/elixir-synth">
-        <strong>elixir-synth</strong>
-        <p>The mono synth: one engine voice, a note sequencer and the plugin-shaped screen.</p>
-        <div class="chips"><span class="chip">JavaScript</span><span class="chip">GPL-3.0</span></div>
-      </a>
-    </div>
+    </article>
   </div></section>
 </main>
 
 <footer class="gutter"><div class="inner foot">
   <span>© 2026 Johnny Hawk Audio</span>
   <a href="https://github.com/johnnyhawk02">github.com/johnnyhawk02</a>
-  <span class="ok">Engine verified against firmware</span>
 </div></footer>
-
-<script>
-(function () {
-  var base = "curl -fsSL https://raw.githubusercontent.com/johnnyhawk02/elixir-desktop-vst/main/install-mac.sh | bash";
-  var code = document.getElementById("mac-cmd");
-  var btns = document.querySelectorAll(".pick button");
-  btns.forEach(function (b) {
-    b.addEventListener("click", function () {
-      btns.forEach(function (x) { x.setAttribute("aria-pressed", x === b ? "true" : "false"); });
-      code.textContent = b.dataset.f ? base + " -s -- " + b.dataset.f : base;
-    });
-  });
-})();
-document.getElementById("copy-mac").addEventListener("click", function () {
-  var btn = this, code = document.getElementById("mac-cmd");
-  function done() { btn.textContent = "Copied"; setTimeout(function () { btn.textContent = "Copy"; }, 1600); }
-  function fallback() { var r = document.createRange(); r.selectNodeContents(code); var sel = getSelection(); sel.removeAllRanges(); sel.addRange(r); btn.textContent = "Press ⌘C"; }
-  if (navigator.clipboard) navigator.clipboard.writeText(code.textContent).then(done, fallback); else fallback();
-});
-</script>
 
 </body>
 </html>

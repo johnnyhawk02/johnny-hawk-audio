@@ -1,0 +1,341 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Install FM/DM · Johnny Hawk Audio</title>
+<meta name="description" content="How to install FM/DM, a free six-voice FM drum machine plug-in, on Mac, Windows or Linux. Step by step, no experience needed.">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap">
+<style>
+:root {
+  --bg: #fafaf9;
+  --fg: #0c0d0e;
+  --muted: #62666b;
+  --line: #e4e4e2;
+  --card: #ffffff;
+  --term: #1b1c1e;
+  --term-fg: #e9eaec;
+  --sans: "Geist", "Helvetica Neue", Arial, sans-serif;
+  --mono: "Geist Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #0b0c0d; --fg: #f1f2f3; --muted: #9a9ea4; --line: #222427; --card: #131416; --term: #000; color-scheme: dark } }
+:root[data-theme="dark"] {
+  --bg: #0b0c0d; --fg: #f1f2f3; --muted: #9a9ea4; --line: #222427; --card: #131416; --term: #000; color-scheme: dark }
+
+:root { padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px); }
+body { margin: 0; background: var(--bg); color: var(--fg); font-family: var(--sans); font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+.gutter { padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.inner { max-width: 760px; margin: 0 auto; }
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--fg); outline-offset: 3px; border-radius: 4px; }
+code { font-family: var(--mono); font-size: .92em; overflow-wrap: anywhere; }
+p code, li code { background: var(--card); border: 1px solid var(--line); border-radius: 5px; padding: 1px 5px; }
+kbd { font: 500 12.5px var(--mono); border: 1px solid var(--line); border-bottom-width: 2px; border-radius: 5px; padding: 1px 6px; background: var(--card); white-space: nowrap; }
+
+/* Nav */
+.top { border-bottom: 1px solid var(--line); }
+.nav { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 14px; font-size: 14px; }
+.nav a { text-decoration: none; color: var(--muted); }
+.nav a:hover { color: var(--fg); }
+.nav .home { color: var(--fg); font-weight: 600; letter-spacing: -.01em; }
+
+.btn { display: inline-flex; align-items: center; gap: 8px; border-radius: 999px; padding: 10px 18px; font: 500 14px var(--sans); text-decoration: none; border: 1px solid var(--fg); background: var(--fg); color: var(--bg); }
+.btn.ghost { background: transparent; color: var(--fg); border-color: var(--line); }
+.btn:hover { opacity: .88; }
+
+/* Hero */
+.hero { padding-block: 44px 36px; display: flex; flex-direction: column; gap: 16px; }
+.eyebrow { font: 500 12px var(--mono); text-transform: uppercase; letter-spacing: .1em; color: var(--muted); margin: 0; }
+h1 { font-size: clamp(36px, 7vw, 64px); line-height: 1.02; letter-spacing: -.045em; font-weight: 600; margin: 0; text-wrap: balance; }
+.sub { font-size: clamp(17px, 2.2vw, 19px); color: var(--muted); margin: 0; max-width: 52ch; }
+.try { border: 1px solid var(--line); border-radius: 14px; background: var(--card); padding: 14px 16px; font-size: 15px; display: flex; gap: 12px; align-items: center; justify-content: space-between; flex-wrap: wrap; }
+.try p { margin: 0; }
+
+/* Sections */
+.section { border-top: 1px solid var(--line); padding-block: 44px; }
+h2 { font-size: clamp(26px, 4.5vw, 36px); letter-spacing: -.03em; line-height: 1.1; font-weight: 600; margin: 0 0 14px; text-wrap: balance; }
+h3 { font-size: 18px; letter-spacing: -.01em; font-weight: 600; margin: 28px 0 8px; }
+.section p { margin: 0 0 12px; max-width: 62ch; }
+.muted { color: var(--muted); }
+
+/* Tabs */
+.tabs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin: 4px 0 24px; }
+.tab { font: 600 16px var(--sans); border: 1px solid var(--line); background: var(--card); color: var(--fg); border-radius: 14px; padding: 14px 8px; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 2px; }
+.tab small { font: 400 12px var(--sans); color: var(--muted); }
+.tab[aria-selected=true] { background: var(--fg); color: var(--bg); border-color: var(--fg); }
+.tab[aria-selected=true] small { color: inherit; opacity: .75; }
+.panel[hidden] { display: none; }
+.detected { font-size: 14px; color: var(--muted); margin: -12px 0 20px; min-height: 1.6em; }
+
+/* Command boxes */
+.cmd-label { font: 500 12px var(--mono); text-transform: uppercase; letter-spacing: .08em; color: var(--muted); margin: 0 0 8px; }
+.cmd { display: flex; align-items: stretch; border: 1px solid var(--line); border-radius: 12px; overflow: hidden; background: var(--term); color: var(--term-fg); margin-bottom: 18px; }
+.cmd code { flex: 1; min-width: 0; font: 400 13.5px/1.55 var(--mono); padding: 12px 14px; white-space: pre-wrap; word-break: break-all; overflow-wrap: anywhere; user-select: all; -webkit-user-select: all; }
+.copy { flex: none; min-width: 84px; font: 600 14px var(--sans); border: 0; border-left: 1px solid rgba(255,255,255,.12); background: #fafaf9; color: #0c0d0e; padding: 0 16px; cursor: pointer; }
+.copy:hover { opacity: .9; }
+.copy.done { background: #22a55b; color: #fff; }
+
+/* Steps */
+.steps { list-style: none; counter-reset: s; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0; }
+.steps > li { counter-increment: s; position: relative; padding: 14px 0 14px 46px; border-top: 1px solid var(--line); }
+.steps > li:last-child { border-bottom: 1px solid var(--line); }
+.steps > li::before { content: counter(s); position: absolute; left: 0; top: 13px; width: 30px; height: 30px; border-radius: 50%; border: 1px solid var(--line); background: var(--card); display: grid; place-items: center; font: 600 14px var(--sans); }
+.steps p { margin: 0; }
+.steps .aside { color: var(--muted); font-size: 15px; margin-top: 4px; }
+
+/* Illustration: a little terminal window */
+.illo { margin: 12px 0 2px; max-width: 420px; border-radius: 10px; overflow: hidden; border: 1px solid var(--line); background: var(--term); color: var(--term-fg); font: 400 13px/1.5 var(--mono); }
+.illo .bar { display: flex; align-items: center; gap: 6px; padding: 8px 10px; background: rgba(255,255,255,.07); font: 500 11px var(--sans); color: #a3a7ad; }
+.illo .bar i { width: 10px; height: 10px; border-radius: 50%; background: #ff5f57; display: inline-block; }
+.illo .bar i:nth-child(2) { background: #febc2e; } .illo .bar i:nth-child(3) { background: #28c840; }
+.illo .bar span { margin-left: 8px; }
+.illo.win { background: #012456; }
+.illo.win .bar { justify-content: space-between; background: rgba(255,255,255,.1); color: #d6dbe3; }
+.illo .body { padding: 12px 14px 16px; min-height: 64px; }
+.illo .cursor { display: inline-block; width: 8px; height: 15px; background: currentColor; vertical-align: -2px; animation: blink 1.1s steps(1) infinite; }
+@keyframes blink { 50% { opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { .illo .cursor { animation: none; } }
+.done-line { color: #6fdc96; }
+
+/* Info boxes */
+.note { border: 1px solid var(--line); border-radius: 14px; background: var(--card); padding: 16px 18px; margin: 20px 0 0; font-size: 15px; }
+.note p { margin: 0 0 8px; } .note p:last-child { margin: 0; }
+.note strong { font-weight: 600; }
+
+/* DAW rows / FAQ */
+.rows { list-style: none; margin: 0 0 16px; padding: 0; border-top: 1px solid var(--line); }
+.rows li { display: grid; grid-template-columns: 170px 1fr; gap: 16px; padding: 13px 0; border-bottom: 1px solid var(--line); font-size: 15px; }
+.rows li > strong { font-weight: 600; }
+@media (max-width: 560px) { .rows li { grid-template-columns: 1fr; gap: 2px; } }
+details { border-top: 1px solid var(--line); padding: 4px 0; }
+details:last-of-type { border-bottom: 1px solid var(--line); }
+summary { cursor: pointer; padding: 12px 0; font-weight: 600; list-style-position: outside; }
+details p { margin: 0 0 14px; color: var(--fg); }
+.facts { list-style: none; padding: 0; margin: 0 0 12px; font-size: 15px; }
+.facts li { padding: 6px 0; }
+
+footer { border-top: 1px solid var(--line); padding-block: 28px 44px; font-size: 14px; color: var(--muted); }
+footer p { margin: 0 0 8px; max-width: 70ch; }
+footer a:hover { color: var(--fg); }
+.ctas { display: flex; gap: 8px; flex-wrap: wrap; margin: 4px 0 4px; }
+.ctas .btn .muted { font-weight: 400; font-size: 13px; }
+.note .cmd { margin: 10px 0 0; }
+</style>
+</head>
+<body>
+
+<div class="top gutter">
+  <div class="inner nav">
+    <a class="home" href="/">Johnny Hawk Audio</a>
+    <a href="https://elixir-fm.pages.dev" target="_blank" rel="noopener">Open the app</a>
+  </div>
+</div>
+
+<main>
+  <div class="gutter"><div class="inner hero">
+    <p class="eyebrow">FM/DM · free plug-in</p>
+    <h1>Install FM/DM</h1>
+    <p class="sub">FM/DM is a free six-voice FM drum machine. It comes as a VST3 / AU plug-in and as a standalone app. This page shows you how to put it on your computer, one small step at a time. You don&rsquo;t need any experience.</p>
+    <div class="try">
+      <p>Want to hear it first? It runs in your web browser, no install needed.</p>
+      <a class="btn ghost" href="https://elixir-fm.pages.dev" target="_blank" rel="noopener">Try it in the browser</a>
+    </div>
+  </div></div>
+
+  <section class="section gutter" id="before"><div class="inner">
+    <h2>Before you start</h2>
+    <p>Music software is often called a <b>DAW</b> (short for digital audio workstation). Ableton Live, Logic Pro, FL Studio, Reaper, Bitwig, Cubase and GarageBand are all DAWs. A <b>plug-in</b> is an extra instrument you add to your DAW. FM/DM also installs as an <b>app</b>, so you can play it without a DAW.</p>
+    <ul class="facts">
+      <li><b>Mac</b> (Apple Silicon and Intel, macOS 10.13 or later): VST3, AU and the app. AU is the kind Logic Pro and GarageBand use.</li>
+      <li><b>Windows</b> 10 or 11, 64-bit: VST3 and the app.</li>
+      <li><b>Linux</b> (64-bit x86, built on Ubuntu 22.04, so most distributions from 2022 on): VST3 and the app.</li>
+    </ul>
+  </div></section>
+
+  <section class="section gutter" id="install"><div class="inner">
+    <h2>Pick your computer</h2>
+    <div class="tabs" role="tablist" aria-label="Your computer">
+      <button class="tab" role="tab" id="tab-mac" aria-controls="panel-mac" aria-selected="true">Mac<small>macOS 10.13+</small></button>
+      <button class="tab" role="tab" id="tab-windows" aria-controls="panel-windows" aria-selected="false" tabindex="-1">Windows<small>10 or 11</small></button>
+      <button class="tab" role="tab" id="tab-linux" aria-controls="panel-linux" aria-selected="false" tabindex="-1">Linux<small>x86_64</small></button>
+    </div>
+    <p class="detected" id="detected" aria-live="polite"></p>
+
+    <!-- Mac -->
+    <div class="panel" role="tabpanel" id="panel-mac" aria-labelledby="tab-mac">
+      <p class="cmd-label">Mac install command</p>
+      <div class="cmd"><code data-cmd="curl -fsSL https://github.com/johnnyhawk02/fm-drum-machine/releases/download/plugin-latest/install.sh | sh">curl -fsSL https://github.com/johnnyhawk02/fm-drum-machine/releases/download/plugin-latest/install.sh | sh</code><button type="button" class="copy">Copy</button></div>
+      <ol class="steps">
+        <li>
+          <p><b>Open Terminal.</b> Press <kbd>Cmd</kbd> + <kbd>Space</kbd>, type <b>Terminal</b>, press <kbd>Return</kbd>.</p>
+          <p class="aside">A window with a blinking cursor opens. That is all Terminal is: a place to type commands.</p>
+          <div class="illo" aria-hidden="true"><div class="bar"><i></i><i></i><i></i><span>Terminal</span></div><div class="body">~ % <span class="cursor"></span></div></div>
+        </li>
+        <li><p>Click <b>Copy</b> on the install command above.</p></li>
+        <li><p>Click in the Terminal window, then paste with <kbd>Cmd</kbd> + <kbd>V</kbd>.</p></li>
+        <li><p>Press <kbd>Return</kbd>, and wait for it to finish.</p></li>
+        <li><p>Restart your music software, or rescan plug-ins (see <a href="#daw">Find it in your DAW</a> below). It&rsquo;s listed as an instrument called <b>fm-dm</b>.</p></li>
+      </ol>
+      <div class="note">
+        <p><strong>What this does.</strong> It downloads FM/DM and copies the VST3 and AU plug-ins into <code>~/Library/Audio/Plug-Ins</code>, and the app into <code>~/Applications</code>. Running it again is safe; it just updates to the newest version.</p>
+      </div>
+    </div>
+
+    <!-- Windows -->
+    <div class="panel" role="tabpanel" id="panel-windows" aria-labelledby="tab-windows" hidden>
+      <p class="cmd-label">Windows install command</p>
+      <div class="cmd"><code data-cmd="irm https://github.com/johnnyhawk02/fm-drum-machine/releases/download/plugin-latest/install.ps1 | iex">irm https://github.com/johnnyhawk02/fm-drum-machine/releases/download/plugin-latest/install.ps1 | iex</code><button type="button" class="copy">Copy</button></div>
+      <ol class="steps">
+        <li>
+          <p><b>Open PowerShell.</b> Click <b>Start</b>, type <b>PowerShell</b>, press <kbd>Enter</kbd>.</p>
+          <p class="aside">A blue or black window opens. You don&rsquo;t need &ldquo;Run as administrator&rdquo;.</p>
+          <div class="illo win" aria-hidden="true"><div class="bar"><span>Windows PowerShell</span><span>&ndash; &#9633; &times;</span></div><div class="body">PS C:\Users\you&gt; <span class="cursor"></span></div></div>
+        </li>
+        <li><p>Click <b>Copy</b> on the Windows command above.</p></li>
+        <li><p>Right-click inside the PowerShell window to paste (or press <kbd>Ctrl</kbd> + <kbd>V</kbd>).</p></li>
+        <li><p>Press <kbd>Enter</kbd>, and wait for it to finish.</p></li>
+        <li><p>Close PowerShell and rescan plug-ins in your DAW (see <a href="#daw">Find it in your DAW</a> below). The app is in your Start menu as <b>fm-dm</b>.</p></li>
+      </ol>
+      <div class="note">
+        <p><strong>What this does.</strong> It downloads FM/DM, copies the VST3 into <code>%LOCALAPPDATA%\Programs\Common\VST3</code> and the app into <code>%LOCALAPPDATA%\Programs\fm-dm</code>, and adds the app to the Start menu. These are your own folders, so no admin permission is needed. Running it again is safe; it just updates to the newest version.</p>
+        <p>If your DAW doesn&rsquo;t find it, add <code>%LOCALAPPDATA%\Programs\Common\VST3</code> to the DAW&rsquo;s VST3 folders and rescan.</p>
+        <p>The screen uses Microsoft Edge WebView2, which Windows already includes.</p>
+      </div>
+    </div>
+
+    <!-- Linux -->
+    <div class="panel" role="tabpanel" id="panel-linux" aria-labelledby="tab-linux" hidden>
+      <p class="cmd-label">Linux install command</p>
+      <div class="cmd"><code data-cmd="curl -fsSL https://github.com/johnnyhawk02/fm-drum-machine/releases/download/plugin-latest/install.sh | sh">curl -fsSL https://github.com/johnnyhawk02/fm-drum-machine/releases/download/plugin-latest/install.sh | sh</code><button type="button" class="copy">Copy</button></div>
+      <ol class="steps">
+        <li><p><b>Open your terminal app.</b> On many systems <kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>T</kbd> opens it.</p></li>
+        <li><p>Click <b>Copy</b> above, then paste into the terminal with <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>V</kbd>.</p></li>
+        <li><p>Press <kbd>Enter</kbd>, and wait for it to finish.</p></li>
+        <li><p>Rescan plug-ins in your DAW, or run the app with <code>~/.local/bin/fm-dm</code>.</p></li>
+      </ol>
+      <div class="note">
+        <p><strong>What this does.</strong> It downloads FM/DM and copies the VST3 into <code>~/.vst3</code> and the app to <code>~/.local/bin/fm-dm</code>. Running it again is safe; it just updates to the newest version.</p>
+        <p>The screen needs WebKitGTK 4.1. On Debian or Ubuntu, install it with <code>sudo apt install libwebkit2gtk-4.1-0</code>.</p>
+      </div>
+    </div>
+  </div></section>
+
+  <section class="section gutter" id="download"><div class="inner">
+    <h2>Rather not use a terminal?</h2>
+    <p>Download the zip for your computer, unzip it, and copy the plug-in into your plug-in folder yourself.</p>
+    <div class="ctas">
+      <a class="btn ghost" href="https://github.com/johnnyhawk02/fm-drum-machine/releases/download/plugin-latest/fm-dm-mac.zip">Mac zip<span class="muted">VST3, AU, app</span></a>
+      <a class="btn ghost" href="https://github.com/johnnyhawk02/fm-drum-machine/releases/download/plugin-latest/fm-dm-windows.zip">Windows zip<span class="muted">VST3, app</span></a>
+      <a class="btn ghost" href="https://github.com/johnnyhawk02/fm-drum-machine/releases/download/plugin-latest/fm-dm-linux.zip">Linux zip<span class="muted">VST3, app</span></a>
+    </div>
+    <div class="note">
+      <p><strong>On a Mac,</strong> a zip downloaded in a web browser is quarantined. If macOS says the plug-in &ldquo;can&rsquo;t be opened&rdquo;, paste this into Terminal and press Return. The terminal install does this for you.</p>
+      <div class="cmd"><code data-cmd="xattr -dr com.apple.quarantine ~/Library/Audio/Plug-Ins/VST3/fm-dm.vst3 ~/Library/Audio/Plug-Ins/Components/fm-dm.component">xattr -dr com.apple.quarantine ~/Library/Audio/Plug-Ins/VST3/fm-dm.vst3 ~/Library/Audio/Plug-Ins/Components/fm-dm.component</code><button type="button" class="copy">Copy</button></div>
+    </div>
+  </div></section>
+
+  <section class="section gutter" id="daw"><div class="inner">
+    <h2>Find it in your DAW</h2>
+    <ul class="rows">
+      <li><strong>Ableton Live</strong><span>Settings &gt; Plug-ins, turn on &ldquo;Use VST3 Plug-in System Folders&rdquo;, click Rescan.</span></li>
+      <li><strong>Logic Pro / GarageBand</strong><span>(Mac) It appears under Audio Units. If not, restart Logic.</span></li>
+      <li><strong>FL Studio</strong><span>Options &gt; Manage plugins &gt; Find plugins.</span></li>
+      <li><strong>Reaper</strong><span>Options &gt; Preferences &gt; Plug-ins &gt; VST &gt; Re-scan.</span></li>
+      <li><strong>Bitwig, Cubase, Studio One and others</strong><span>Rescan or restart; it&rsquo;s listed as an instrument called &ldquo;fm-dm&rdquo;.</span></li>
+    </ul>
+    <p>Add it to an instrument track.</p>
+  </div></section>
+
+  <section class="section gutter" id="using"><div class="inner">
+    <h2>Using it</h2>
+    <ul class="rows">
+      <li><strong>Tempo and play</strong><span>It follows your DAW&rsquo;s tempo and play/stop. Or press play in the plug-in to run it on its own.</span></li>
+      <li><strong>MIDI notes</strong><span>General MIDI drum notes play the drums (36 kick, 38 snare, 42/46 hats, 49 cymbal). Or use C3 upwards for the six drums in order.</span></li>
+      <li><strong>Presets</strong><span>Presets made in the <a href="https://elixir-fm.pages.dev" target="_blank" rel="noopener">web version</a> load in the plug-in, and presets made in the plug-in load in the web version.</span></li>
+    </ul>
+  </div></section>
+
+  <section class="section gutter" id="update"><div class="inner">
+    <h2>Updating</h2>
+    <p>Run the same install command again. It replaces FM/DM with the newest version.</p>
+  </div></section>
+
+  <section class="section gutter" id="help"><div class="inner">
+    <h2>Trouble?</h2>
+    <details><summary>Nothing shows up in my DAW</summary><p>Make sure your DAW is 64-bit and scans the folder the plug-in went into (on Windows, add <code>%LOCALAPPDATA%\Programs\Common\VST3</code> to its VST3 folders), then rescan. If it still isn&rsquo;t there, restart the DAW.</p></details>
+    <details><summary>The plug-in window is blank (Linux)</summary><p>Install WebKitGTK 4.1. On Debian or Ubuntu: <code>sudo apt install libwebkit2gtk-4.1-0</code>.</p></details>
+    <details><summary>My Mac says it &ldquo;can&rsquo;t be opened&rdquo;</summary><p>You downloaded the zip in a web browser. Use the Terminal command instead, or run the <code>xattr</code> command in <a href="#download">the download section</a>.</p></details>
+    <details><summary>Still stuck?</summary><p>Email <a href="mailto:hello@johnnyhawk.org">hello@johnnyhawk.org</a> and say which computer you have, which DAW, and what happened.</p></details>
+  </div></section>
+</main>
+
+<footer class="gutter"><div class="inner">
+  <p>FM/DM is free, with no warranty.</p>
+  <p><a href="mailto:hello@johnnyhawk.org">hello@johnnyhawk.org</a> · <a href="/">Johnny Hawk Audio</a></p>
+</div></footer>
+
+<script>
+(function () {
+  // Copy buttons: copy the exact single-line command from data-cmd.
+  document.querySelectorAll(".cmd").forEach(function (box) {
+    var code = box.querySelector("code"), btn = box.querySelector(".copy");
+    var text = code.getAttribute("data-cmd");
+    function done() {
+      btn.textContent = "Copied!"; btn.classList.add("done");
+      setTimeout(function () { btn.textContent = "Copy"; btn.classList.remove("done"); }, 1800);
+    }
+    function fallback() {
+      var ta = document.createElement("textarea");
+      ta.value = text; ta.setAttribute("readonly", ""); ta.style.position = "fixed"; ta.style.opacity = "0";
+      document.body.appendChild(ta); ta.select();
+      var ok = false; try { ok = document.execCommand("copy"); } catch (e) {}
+      document.body.removeChild(ta);
+      if (ok) done(); else { var r = document.createRange(); r.selectNodeContents(code); var s = getSelection(); s.removeAllRanges(); s.addRange(r); btn.textContent = "Selected"; }
+    }
+    btn.addEventListener("click", function () {
+      if (navigator.clipboard && window.isSecureContext) navigator.clipboard.writeText(text).then(done, fallback);
+      else fallback();
+    });
+  });
+
+  // Tabs: open the visitor's system first, let them switch.
+  var names = ["mac", "windows", "linux"];
+  var tabs = names.map(function (n) { return document.getElementById("tab-" + n); });
+  function show(name, focus) {
+    names.forEach(function (n, i) {
+      var on = n === name;
+      tabs[i].setAttribute("aria-selected", on ? "true" : "false");
+      tabs[i].tabIndex = on ? 0 : -1;
+      document.getElementById("panel-" + n).hidden = !on;
+      if (on && focus) tabs[i].focus();
+    });
+  }
+  tabs.forEach(function (t, i) {
+    t.addEventListener("click", function () { show(names[i]); document.getElementById("detected").textContent = ""; });
+    t.addEventListener("keydown", function (e) {
+      var d = e.key === "ArrowRight" ? 1 : e.key === "ArrowLeft" ? -1 : 0;
+      if (d) { e.preventDefault(); show(names[(i + d + 3) % 3], true); }
+    });
+  });
+  var ua = navigator.userAgent || "", plat = (navigator.userAgentData && navigator.userAgentData.platform) || navigator.platform || "";
+  var mobile = /iPhone|iPad|iPod|Android/i.test(ua);
+  var guess = null;
+  if (!mobile) {
+    if (/Win/i.test(plat + ua)) guess = "windows";
+    else if (/Mac/i.test(plat + ua)) guess = "mac";
+    else if (/Linux|X11|CrOS/i.test(plat + ua)) guess = "linux";
+  }
+  var hash = (location.hash || "").slice(1);
+  if (names.indexOf(hash) > -1) show(hash);
+  else if (guess) {
+    show(guess);
+    document.getElementById("detected").textContent = "It looks like you\u2019re on " + { mac: "a Mac", windows: "Windows", linux: "Linux" }[guess] + ". Not right? Pick another above.";
+  } else if (mobile) {
+    document.getElementById("detected").textContent = "Reading on your phone? Pick the computer you\u2019ll install it on.";
+  }
+})();
+</script>
+
+</body>
+</html>

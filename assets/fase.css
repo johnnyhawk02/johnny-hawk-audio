@@ -1,0 +1,167 @@
+/* Johnny Hawk Audio: poster look.
+   Speckled pink page, white bands cut at an angle, heavy all-caps type,
+   white letters on skewed black slabs. Loaded after each page's own <style>,
+   so it restyles the shared classes without touching page content. */
+
+html:root:not([data-theme="__none"]) {
+  --pink: #fc0fc0;
+  --ink: #0b0b0b;
+  --paper: #ffffff;
+  --bg: var(--pink);
+  --fg: var(--ink);
+  --muted: rgba(11, 11, 11, .68);
+  --line: var(--ink);
+  --card: var(--paper);
+  --term: #141414;
+  --term-fg: #f1f1f1;
+  --sans: "Archivo", "Helvetica Neue", Arial, sans-serif;
+  --display: "Archivo Black", "Arial Black", "Helvetica Neue", sans-serif;
+  --mono: "Geist Mono", ui-monospace, Menlo, monospace;
+  --tilt: 3.2vw;
+  color-scheme: light;
+}
+
+/* Speckled paper: two layers of fine noise (dark flecks, light flecks) over pink. */
+body {
+  background-color: var(--pink);
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='d'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.1' numOctaves='1' seed='4' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .42 0 0 0 0 0 0 0 0 0 .26 9 0 0 0 -6.1'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23d)'/%3E%3C/svg%3E"),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='340' height='340'%3E%3Cfilter id='l'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.95' numOctaves='1' seed='11' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 .86 0 0 0 0 .97 9 0 0 0 -6.3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23l)'/%3E%3C/svg%3E");
+  color: var(--fg);
+  font-family: var(--sans);
+  overflow-x: hidden;
+}
+:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; border-radius: 0; }
+::selection { background: var(--ink); color: var(--paper); }
+
+/* ---------- Type ---------- */
+h1, h2, h3, .display { font-family: var(--display); font-weight: 400; text-transform: uppercase; }
+h2 { font-size: clamp(30px, 5.4vw, 52px); line-height: .92; letter-spacing: -.02em; margin: 0 0 20px; }
+h3 { font-size: 20px; line-height: 1.05; letter-spacing: -.005em; margin: 32px 0 10px; }
+b, strong { font-weight: 700; }
+.eyebrow, .cmd-label, thead th { color: var(--ink); font-weight: 500; letter-spacing: .12em; }
+.rough { filter: url(#rough); }
+
+/* White letters on a skewed black slab. The slab sits a little inside the
+   letters so the type spills over its edges, like a pasted label. */
+.slab {
+  position: relative; isolation: isolate;
+  display: inline-block; width: fit-content; max-width: 100%;
+  color: var(--paper);
+  padding: .08em .14em .02em;
+}
+.slab::before {
+  content: ""; position: absolute; z-index: -1;
+  inset: .2em -.06em -.02em .05em;
+  background: var(--ink);
+  clip-path: polygon(0 6%, 100% 0, 99% 100%, 1% 94%);
+}
+.slab.b::before { inset: .14em .02em .06em -.08em; clip-path: polygon(0 0, 100% 9%, 98.5% 94%, 0 100%); }
+.slab.c::before { inset: .24em -.04em 0 0; clip-path: polygon(1% 0, 99% 5%, 100% 100%, 0 96%); }
+
+/* ---------- Page header ---------- */
+.top { border: 0; }
+.nav { padding-block: 18px; font: 400 15px var(--display); text-transform: uppercase; letter-spacing: .01em; }
+.nav a, .links a { color: var(--ink); text-decoration: none; }
+.nav a:hover, .links a:hover { color: var(--paper); }
+.nav .home { color: var(--ink); font-weight: 400; letter-spacing: .01em; }
+.slashes { display: flex; flex-wrap: wrap; gap: 0 .35em; }
+.slashes a + a::before { content: "/"; margin-right: .35em; color: var(--ink); }
+
+/* ---------- Hero (install and guide pages) ---------- */
+.hero { padding-block: 28px 44px; gap: 18px; }
+.hero h1 {
+  position: relative; isolation: isolate;
+  width: fit-content; max-width: 100%;
+  font-size: clamp(42px, 9vw, 92px); line-height: .9; letter-spacing: -.025em;
+  color: var(--paper); padding: .1em .14em .04em; margin: 4px 0 6px;
+  transform: rotate(-1.2deg); transform-origin: left center;
+  text-wrap: balance; overflow-wrap: anywhere;
+}
+.hero h1::before {
+  content: ""; position: absolute; z-index: -1;
+  inset: .22em -.05em -.02em .06em;
+  background: var(--ink);
+  clip-path: polygon(0 5%, 100% 0, 98.8% 100%, .6% 95%);
+}
+.sub { color: var(--ink); font-size: clamp(18px, 2.3vw, 21px); line-height: 1.45; max-width: 46ch; font-weight: 500; }
+
+/* ---------- Sections: white bands cut on a slant ---------- */
+main > .section, main > section.section {
+  border: 0;
+  background: var(--paper);
+  padding-block: calc(36px + var(--tilt)) calc(40px + var(--tilt));
+  margin-block: 0 calc(var(--tilt) * -1 + 22px);
+  clip-path: polygon(0 var(--tilt), 100% 0, 100% calc(100% - var(--tilt)), 0 100%);
+}
+main > .section:nth-of-type(even) {
+  clip-path: polygon(0 0, 100% var(--tilt), 100% 100%, 0 calc(100% - var(--tilt)));
+}
+main > .section:last-of-type { margin-bottom: 0; }
+
+/* ---------- Buttons: black slabs ---------- */
+.btn {
+  position: relative; isolation: isolate;
+  border: 0; border-radius: 0; background: transparent; color: var(--paper);
+  font: 400 15px var(--display); text-transform: uppercase; letter-spacing: .02em;
+  text-decoration: none; padding: 13px 20px 11px;
+  transition: transform .12s ease;
+}
+.btn::before {
+  content: ""; position: absolute; inset: 0; z-index: -1;
+  background: var(--ink);
+  clip-path: polygon(0 8%, 100% 0, 98% 100%, 2% 92%);
+}
+.btn.ghost { color: var(--ink); background: transparent; border: 0; }
+.btn.ghost::before { background: var(--ink); }
+.btn.ghost::after {
+  content: ""; position: absolute; inset: 3px; z-index: -1;
+  background: var(--paper);
+  clip-path: polygon(0 8%, 100% 0, 98% 100%, 2% 92%);
+}
+.btn:hover { opacity: 1; transform: rotate(-2deg) scale(1.03); }
+.links a.btn, .links a.btn:hover { color: var(--paper); }
+
+/* ---------- Boxes, tabs, steps ---------- */
+.try, .note { border: 2px solid var(--ink); border-radius: 0; background: var(--paper); box-shadow: 6px 6px 0 var(--ink); }
+.hero .try { transform: rotate(.4deg); }
+.note strong { font-weight: 700; }
+p code, li code { border: 1px solid var(--ink); border-radius: 0; background: #fff0fb; }
+kbd { border: 1.5px solid var(--ink); border-bottom-width: 3px; border-radius: 0; background: var(--paper); }
+
+.tab { border: 2px solid var(--ink); border-radius: 0; background: var(--paper); font: 400 17px var(--display); text-transform: uppercase; }
+.tab small { font: 500 12px var(--sans); text-transform: none; color: var(--muted); }
+.tab[aria-selected=true] { background: var(--ink); color: var(--paper); border-color: var(--ink); transform: rotate(-1.2deg); }
+.tab[aria-selected=true] small { color: inherit; }
+
+.cmd { border: 2px solid var(--ink); border-radius: 0; }
+.copy { background: var(--pink); color: var(--ink); font: 400 14px var(--display); text-transform: uppercase; border-left: 2px solid var(--ink); }
+.copy.done { background: #1f9d55; color: #fff; }
+
+.steps > li { border-top: 2px solid var(--ink); }
+.steps > li:last-child { border-bottom: 2px solid var(--ink); }
+.steps > li::before { border: 0; border-radius: 0; background: var(--ink); color: var(--paper); font: 400 15px var(--display); transform: rotate(-4deg); }
+.illo { border: 2px solid var(--ink); border-radius: 0; }
+
+.rows, .rows li, details, details:last-of-type, th, td, thead th { border-color: var(--ink); }
+.rows { border-top-width: 2px; }
+summary { font-family: var(--display); font-weight: 400; text-transform: uppercase; letter-spacing: .01em; }
+td:first-child { font-weight: 700; }
+.keys td:first-child { font-weight: 400; }
+
+.toc a { border: 2px solid var(--ink); border-radius: 0; background: var(--paper); font: 400 13px var(--display); text-transform: uppercase; }
+.toc a:hover { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+
+.badge { border: 0; border-radius: 0; background: var(--ink); color: var(--paper); font: 500 11px var(--mono); text-transform: uppercase; letter-spacing: .08em; padding: 5px 9px 4px; transform: rotate(-2deg); }
+
+/* ---------- Footer ---------- */
+footer { border: 0; color: var(--ink); padding-block: 40px 52px; font-size: 14px; }
+footer a { color: var(--ink); }
+footer a:hover { color: var(--paper); }
+.foot { color: var(--ink); font: 400 14px var(--display); text-transform: uppercase; }
+
+@media (max-width: 560px) {
+  html:root:not([data-theme="__none"]) { --tilt: 26px; }
+  .hero h1 { transform: rotate(-1.6deg); }
+}
+@media (prefers-reduced-motion: reduce) { .btn { transition: none; } .btn:hover { transform: none; } }

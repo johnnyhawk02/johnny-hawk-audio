@@ -1,13 +1,13 @@
 /* Johnny Hawk Audio: poster look.
-   Speckled coral page, white bands cut at an angle, heavy all-caps type,
+   Speckled pink page, white bands cut at an angle, heavy all-caps type,
    white letters on skewed black slabs. Loaded after each page's own <style>,
    so it restyles the shared classes without touching page content. */
 
 html:root:not([data-theme="__none"]) {
-  --coral: #e46e69;
+  --pink: #fc0fc0;
   --ink: #0b0b0b;
   --paper: #ffffff;
-  --bg: var(--coral);
+  --bg: var(--pink);
   --fg: var(--ink);
   --muted: rgba(11, 11, 11, .68);
   --line: var(--ink);
@@ -21,12 +21,12 @@ html:root:not([data-theme="__none"]) {
   color-scheme: light;
 }
 
-/* Speckled paper: two layers of fine noise (dark flecks, light flecks) over coral. */
+/* Speckled paper: two layers of fine noise (dark flecks, light flecks) over pink. */
 body {
-  background-color: var(--coral);
+  background-color: var(--pink);
   background-image:
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='d'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.1' numOctaves='1' seed='4' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .35 0 0 0 0 .1 0 0 0 0 .09 9 0 0 0 -6.1'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23d)'/%3E%3C/svg%3E"),
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='340' height='340'%3E%3Cfilter id='l'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.95' numOctaves='1' seed='11' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 .92 0 0 0 0 .9 9 0 0 0 -6.3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23l)'/%3E%3C/svg%3E");
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='d'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.1' numOctaves='1' seed='4' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .42 0 0 0 0 0 0 0 0 0 .26 9 0 0 0 -6.1'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23d)'/%3E%3C/svg%3E"),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='340' height='340'%3E%3Cfilter id='l'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.95' numOctaves='1' seed='11' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 .86 0 0 0 0 .97 9 0 0 0 -6.3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23l)'/%3E%3C/svg%3E");
   color: var(--fg);
   font-family: var(--sans);
   overflow-x: hidden;
@@ -126,7 +126,7 @@ main > .section:last-of-type { margin-bottom: 0; }
 .try, .note { border: 2px solid var(--ink); border-radius: 0; background: var(--paper); box-shadow: 6px 6px 0 var(--ink); }
 .hero .try { transform: rotate(.4deg); }
 .note strong { font-weight: 700; }
-p code, li code { border: 1px solid var(--ink); border-radius: 0; background: #fff4f3; }
+p code, li code { border: 1px solid var(--ink); border-radius: 0; background: #fff0fb; }
 kbd { border: 1.5px solid var(--ink); border-bottom-width: 3px; border-radius: 0; background: var(--paper); }
 
 .tab { border: 2px solid var(--ink); border-radius: 0; background: var(--paper); font: 400 17px var(--display); text-transform: uppercase; }
@@ -135,7 +135,7 @@ kbd { border: 1.5px solid var(--ink); border-bottom-width: 3px; border-radius: 0
 .tab[aria-selected=true] small { color: inherit; }
 
 .cmd { border: 2px solid var(--ink); border-radius: 0; }
-.copy { background: var(--coral); color: var(--ink); font: 400 14px var(--display); text-transform: uppercase; border-left: 2px solid var(--ink); }
+.copy { background: var(--pink); color: var(--ink); font: 400 14px var(--display); text-transform: uppercase; border-left: 2px solid var(--ink); }
 .copy.done { background: #1f9d55; color: #fff; }
 
 .steps > li { border-top: 2px solid var(--ink); }

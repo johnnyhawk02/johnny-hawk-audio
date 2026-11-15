@@ -172,15 +172,15 @@ footer a:hover { color: var(--paper); }
 /* Extruded slabs: stacked hard shadows in deep magenta give each black label a side. */
 html:root { --side: #6a0052; }
 .slab, .hero h1 { filter: drop-shadow(.025em .035em 0 var(--side)) drop-shadow(.025em .035em 0 var(--side)) drop-shadow(.02em .03em 0 var(--side)); }
-/* Front title: smooth, glossy black plastic. Each line gets its own sheen
-   (a soft highlight across the top, a darker belly, a faint reflection low
-   down), a thin light rim on top, and black depth plus a soft drop shadow. */
+/* Front title: matt black with a faint sheen. Each line gets a soft, wide
+   lift of light across the top that fades out, a barely-there rim on top,
+   and black depth plus a soft drop shadow. */
 #top .hero h1 { filter:
-  drop-shadow(0 -1px 0 rgba(255, 255, 255, .55))
+  drop-shadow(0 -1px 0 rgba(255, 255, 255, .16))
   drop-shadow(1px 2px 0 #000) drop-shadow(1px 2px 0 #000) drop-shadow(1px 2px 0 #111)
   drop-shadow(6px 12px 10px rgba(40, 0, 30, .45)); }
 #top .hero h1 span {
-  background: linear-gradient(180deg, #8a8a92 0%, #4a4a52 16%, #2a2a30 33%, #050506 36%, #000 60%, #0b0b0d 76%, #3a3a42 90%, #16161a 100%);
+  background: linear-gradient(172deg, #3b3b3e 0%, #262628 22%, #161617 48%, #111112 72%, #1b1b1d 100%);
   -webkit-background-clip: text; background-clip: text;
   -webkit-text-fill-color: transparent; color: transparent;
 }

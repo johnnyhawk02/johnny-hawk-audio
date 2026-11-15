@@ -1,6 +1,5 @@
-// Depth for the poster: bands fold up into place as they scroll in, product
-// cards lean toward the mouse, and the Three.js slab scene loads behind the
-// page once everything else is on screen. Plain DOM, no dependencies.
+// Depth for the poster: bands fold up into place as they scroll in and
+// product cards lean toward the mouse. Plain DOM, no dependencies.
 const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const fine = matchMedia('(hover: hover) and (pointer: fine)').matches;
 const root = document.documentElement;
@@ -49,18 +48,4 @@ if (!reduced && fine) {
       card.style.setProperty('--rx', '0deg');
     });
   }
-}
-
-// The WebGL slabs: skipped for Save-Data, loaded when the browser is idle.
-// On install and guide pages they only go in the margins, so skip them when
-// the screen has no room beside the text (phones).
-const save = navigator.connection && navigator.connection.saveData;
-const front = !!document.querySelector('.band');
-const col = (document.querySelector('main .inner') || {}).offsetWidth || 0;
-const room = front || (innerWidth - col) / 2 > 110;
-if (!save && room) {
-  const go = () => import('./scene.js').then((m) => m.start({ reduced, front })).catch(() => {});
-  const idle = window.requestIdleCallback || ((f) => setTimeout(f, 300));
-  if (document.readyState === 'complete') idle(go);
-  else addEventListener('load', () => idle(go), { once: true });
 }

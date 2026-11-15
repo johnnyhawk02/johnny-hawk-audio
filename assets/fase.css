@@ -168,25 +168,21 @@ footer a:hover { color: var(--paper); }
 
 /* ---------- 3D ----------
    /assets/depth.js adds .d3 to <html>, sets --fold on each band as it scrolls
-   in and --rx/--ry on product cards; /assets/scene.js draws the Three.js
-   slabs on a fixed canvas behind everything. Without JS the page is flat. */
-.scene3d {
-  position: fixed; inset: 0; width: 100%; height: 100%;
-  z-index: -1; pointer-events: none;
-  opacity: 0; transition: opacity .9s ease;
-}
-.scene3d.on { opacity: 1; }
-.scene3d.masked {
-  -webkit-mask-image: linear-gradient(90deg, #000 calc(50% - var(--col, 800px) / 2 - 30px), transparent calc(50% - var(--col, 800px) / 2), transparent calc(50% + var(--col, 800px) / 2), #000 calc(50% + var(--col, 800px) / 2 + 30px));
-          mask-image: linear-gradient(90deg, #000 calc(50% - var(--col, 800px) / 2 - 30px), transparent calc(50% - var(--col, 800px) / 2), transparent calc(50% + var(--col, 800px) / 2), #000 calc(50% + var(--col, 800px) / 2 + 30px));
-}
-
+   in and --rx/--ry on product cards. Without JS the page is flat. */
 /* Extruded slabs: stacked hard shadows in deep magenta give each black label a side. */
 html:root { --side: #6a0052; }
 .slab, .hero h1 { filter: drop-shadow(.025em .035em 0 var(--side)) drop-shadow(.025em .035em 0 var(--side)) drop-shadow(.02em .03em 0 var(--side)); }
-#top .hero h1 {
-  text-shadow: 1px 1px 0 #b8008c, 2px 2px 0 #a3007c, 3px 3px 0 #8f006c, 4px 4px 0 #7c005e,
-               5px 5px 0 #6a0052, 6px 6px 0 #6a0052, 7px 8px 0 #6a0052, 9px 12px 14px rgba(60, 0, 45, .35);
+/* Front title: smooth, glossy black plastic. Each line gets its own sheen
+   (a soft highlight across the top, a darker belly, a faint reflection low
+   down), a thin light rim on top, and black depth plus a soft drop shadow. */
+#top .hero h1 { filter:
+  drop-shadow(0 -1px 0 rgba(255, 255, 255, .55))
+  drop-shadow(1px 2px 0 #000) drop-shadow(1px 2px 0 #000) drop-shadow(1px 2px 0 #111)
+  drop-shadow(6px 12px 10px rgba(40, 0, 30, .45)); }
+#top .hero h1 span {
+  background: linear-gradient(180deg, #8a8a92 0%, #4a4a52 16%, #2a2a30 33%, #050506 36%, #000 60%, #0b0b0d 76%, #3a3a42 90%, #16161a 100%);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent; color: transparent;
 }
 
 /* Buttons are blocks: they lift on hover and press in when clicked. */
@@ -219,7 +215,7 @@ html:root { --side: #6a0052; }
 /* Front page: the bands cast a shadow on the pink, so they read as sheets
    above it (desktop only; costly on phones). */
 @media (hover: hover) and (pointer: fine) and (min-width: 701px) {
-  .d3 main#top { filter: drop-shadow(10px 14px 0 rgba(106, 0, 82, .55)); }
+  .d3 main#top .bands { filter: drop-shadow(10px 14px 0 rgba(106, 0, 82, .55)); }
 }
 
 @media (prefers-reduced-motion: reduce) {

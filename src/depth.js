@@ -49,3 +49,31 @@ if (!reduced && fine) {
     });
   }
 }
+
+// The front title is a thin sheet with a very slow ripple running through it:
+// each letter gets its own place in the wave (--i) and CSS does the motion.
+const title = document.querySelector('#top .hero h1');
+if (title && !reduced) {
+  title.setAttribute('aria-label', [...title.querySelectorAll('span')].map((l) => l.textContent.trim()).join(' '));
+  let i = 0;
+  for (const line of title.querySelectorAll('span')) {
+    line.setAttribute('aria-hidden', 'true');
+    // Words stay whole (no breaks inside a word); letters ripple inside them.
+    line.innerHTML = line.textContent.trim().split(/\s+/).map((word) =>
+      `<i class="w">${[...word].map((c) => `<i class="ch" style="--i:${i++}">${c}</i>`).join('')}</i>`).join(' ');
+    i += 2; // a little gap in the wave between lines
+  }
+  title.classList.add('ripple');
+}
+
+// The front title turns a little toward the mouse.
+if (title && !reduced && fine) {
+  let raf = 0;
+  addEventListener('pointermove', (e) => {
+    cancelAnimationFrame(raf);
+    raf = requestAnimationFrame(() => {
+      title.style.setProperty('--ty', ((e.clientX / innerWidth - 0.5) * 12).toFixed(2) + 'deg');
+      title.style.setProperty('--tx', ((0.5 - e.clientY / innerHeight) * 8).toFixed(2) + 'deg');
+    });
+  }, { passive: true });
+}

@@ -165,3 +165,64 @@ footer a:hover { color: var(--paper); }
   .hero h1 { transform: rotate(-1.6deg); }
 }
 @media (prefers-reduced-motion: reduce) { .btn { transition: none; } .btn:hover { transform: none; } }
+
+/* ---------- 3D ----------
+   /assets/depth.js adds .d3 to <html>, sets --fold on each band as it scrolls
+   in and --rx/--ry on product cards; /assets/scene.js draws the Three.js
+   slabs on a fixed canvas behind everything. Without JS the page is flat. */
+.scene3d {
+  position: fixed; inset: 0; width: 100%; height: 100%;
+  z-index: -1; pointer-events: none;
+  opacity: 0; transition: opacity .9s ease;
+}
+.scene3d.on { opacity: 1; }
+.scene3d.masked {
+  -webkit-mask-image: linear-gradient(90deg, #000 calc(50% - var(--col, 800px) / 2 - 30px), transparent calc(50% - var(--col, 800px) / 2), transparent calc(50% + var(--col, 800px) / 2), #000 calc(50% + var(--col, 800px) / 2 + 30px));
+          mask-image: linear-gradient(90deg, #000 calc(50% - var(--col, 800px) / 2 - 30px), transparent calc(50% - var(--col, 800px) / 2), transparent calc(50% + var(--col, 800px) / 2), #000 calc(50% + var(--col, 800px) / 2 + 30px));
+}
+
+/* Extruded slabs: stacked hard shadows in deep magenta give each black label a side. */
+html:root { --side: #6a0052; }
+.slab, .hero h1 { filter: drop-shadow(.025em .035em 0 var(--side)) drop-shadow(.025em .035em 0 var(--side)) drop-shadow(.02em .03em 0 var(--side)); }
+#top .hero h1 {
+  text-shadow: 1px 1px 0 #b8008c, 2px 2px 0 #a3007c, 3px 3px 0 #8f006c, 4px 4px 0 #7c005e,
+               5px 5px 0 #6a0052, 6px 6px 0 #6a0052, 7px 8px 0 #6a0052, 9px 12px 14px rgba(60, 0, 45, .35);
+}
+
+/* Buttons are blocks: they lift on hover and press in when clicked. */
+.btn { filter: drop-shadow(4px 5px 0 var(--side)); transition: transform .12s ease, filter .12s ease; }
+.btn:hover { filter: drop-shadow(6px 8px 0 var(--side)); transform: translate(-2px, -3px) rotate(-2deg) scale(1.03); }
+.btn:active { filter: drop-shadow(1px 1px 0 var(--side)); transform: translate(3px, 4px) rotate(-2deg); }
+.ctas .btn.play:hover { transform: translate(-2px, -3px) rotate(-3.5deg) scale(1.03); }
+.ctas .btn.play:active { transform: translate(3px, 4px) rotate(-2deg); }
+
+/* White bands fold up into place, hinged on their bottom edge. */
+.d3 .band, .d3 main > .section {
+  transform: perspective(1100px) rotateX(calc(var(--fold, 0) * 16deg)) translateY(calc(var(--fold, 0) * 36px));
+  transform-origin: 50% 100%;
+}
+.d3 main > .section { transform: perspective(1100px) rotateX(calc(var(--fold, 0) * 10deg)) translateY(calc(var(--fold, 0) * 24px)); }
+
+/* Product cards lean toward the mouse; title and buttons float above the band. */
+.d3 .product {
+  transform: perspective(1300px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+  transform-style: preserve-3d;
+  transition: transform .3s ease-out;
+}
+.d3 .product > .eyebrow, .d3 .product > .badge { transform: translateZ(18px); }
+.d3 .product > .tag { transform: translateZ(26px); }
+.d3 .product > h2 { transform: translateZ(70px) rotate(-1.4deg); }
+.d3 .band.flip .product > h2 { transform: translateZ(70px) rotate(1.2deg); }
+.d3 .product > .ctas { transform: translateZ(48px); }
+.d3 .product > .badge { transform: translateZ(18px) rotate(-2deg); }
+
+/* Front page: the bands cast a shadow on the pink, so they read as sheets
+   above it (desktop only; costly on phones). */
+@media (hover: hover) and (pointer: fine) and (min-width: 701px) {
+  .d3 main#top { filter: drop-shadow(10px 14px 0 rgba(106, 0, 82, .55)); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn, .d3 .product { transition: none; }
+  .btn:hover, .btn:active, .ctas .btn.play:hover, .ctas .btn.play:active { transform: none; }
+}

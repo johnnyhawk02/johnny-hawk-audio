@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Install FILTH · Johnny Hawk Audio</title>
+<meta name="description" content="Download and install FILTH, a free Polivoks synth plug-in: VST3 for Mac, Windows and Linux, AU for Mac, and a standalone app.">
+<meta name="theme-color" content="#fc0fc0">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;700&family=Archivo+Black&family=Geist+Mono:wght@400;500&display=swap">
+<style>
+:root {
+  --bg: #fafaf9; --fg: #0c0d0e; --muted: #62666b; --line: #e4e4e2; --card: #ffffff;
+  --term: #1b1c1e; --term-fg: #e9eaec;
+  --sans: "Archivo", "Helvetica Neue", Arial, sans-serif;
+  --mono: "Geist Mono", ui-monospace, Menlo, monospace;
+}
+:root { padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px); }
+body { margin: 0; background: var(--bg); color: var(--fg); font-family: var(--sans); font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+.gutter { padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.inner { max-width: 820px; margin: 0 auto; }
+a { color: inherit; }
+code { font-family: var(--mono); font-size: .92em; overflow-wrap: anywhere; }
+p code, li code { padding: 1px 5px; }
+kbd { font: 500 12.5px var(--mono); padding: 1px 6px; white-space: nowrap; }
+
+.nav { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 14px; font-size: 14px; }
+.btn { display: inline-flex; align-items: center; gap: 8px; }
+
+.hero { padding-block: 44px 36px; display: flex; flex-direction: column; gap: 16px; }
+.eyebrow { font: 500 12px var(--mono); text-transform: uppercase; letter-spacing: .1em; margin: 0; }
+.sub { margin: 0; }
+.try { padding: 14px 16px; font-size: 15px; display: flex; gap: 12px; align-items: center; justify-content: space-between; flex-wrap: wrap; }
+.try p { margin: 0; }
+
+.section { padding-block: 44px; }
+.section p { margin: 0 0 12px; max-width: 62ch; }
+.muted { color: var(--muted); }
+
+/* One block per OS, all shown. The visitor's own is moved first and marked. */
+.oses { display: flex; flex-direction: column; gap: 26px; margin-top: 8px; }
+.os { position: relative; border: 2px solid var(--ink, #000); background: var(--paper, #fff); padding: 20px 20px 22px; }
+.os h3 { margin: 0 0 4px; font-size: clamp(28px, 4.4vw, 40px); line-height: .95; }
+.os .for { margin: 0 0 16px; font-size: 15px; color: var(--muted); }
+.os .you { display: none; position: absolute; top: -14px; right: 16px; margin: 0; }
+.os.mine { border-width: 3px; box-shadow: 10px 10px 0 var(--pink, #fc0fc0), 10px 10px 0 2px var(--ink, #000); transform: rotate(-.5deg); }
+.os.mine .you { display: inline-block; }
+.os.mine h3 .slab { font-size: 1em; }
+.dl { display: flex; flex-wrap: wrap; gap: 12px 14px; margin: 0 0 20px; }
+.dl .btn { font-size: 17px; padding: 14px 20px 11px; }
+.dl .btn small { font: 500 12px var(--sans); text-transform: none; letter-spacing: 0; opacity: .8; }
+.os .where { font-size: 15px; margin: 0 0 8px; max-width: none; }
+
+.cmd-label { font: 500 12px var(--mono); text-transform: uppercase; letter-spacing: .08em; margin: 0 0 8px; }
+.cmd { display: flex; align-items: stretch; overflow: hidden; background: var(--term); color: var(--term-fg); margin-bottom: 12px; }
+.cmd code { flex: 1; min-width: 0; font: 400 13px/1.55 var(--mono); padding: 12px 14px; white-space: pre-wrap; word-break: break-all; overflow-wrap: anywhere; user-select: all; -webkit-user-select: all; }
+.copy { flex: none; min-width: 84px; padding: 0 16px; cursor: pointer; border: 0; }
+.os .cmd { margin-bottom: 0; }
+.os .then { font-size: 15px; margin: 12px 0 0; max-width: none; }
+
+.detected { font-size: 15px; margin: 0 0 6px; min-height: 1.6em; font-weight: 500; }
+
+.note { padding: 16px 18px; margin: 20px 0 0; font-size: 15px; }
+.note p { margin: 0 0 8px; } .note p:last-child { margin: 0; }
+.note .cmd { margin: 10px 0 10px; }
+.note h3 { margin: 0 0 8px; }
+
+.rows { list-style: none; margin: 0 0 16px; padding: 0; border-top: 1px solid var(--line); }
+.rows li { display: grid; grid-template-columns: 190px 1fr; gap: 16px; padding: 13px 0; border-bottom: 1px solid var(--line); font-size: 15px; }
+.rows li > strong { font-weight: 700; }
+@media (max-width: 560px) {
+  .rows li { grid-template-columns: 1fr; gap: 2px; }
+  .os { padding: 18px 14px 18px; }
+  .os.mine { box-shadow: 6px 6px 0 var(--pink, #fc0fc0), 6px 6px 0 2px var(--ink, #000); }
+  .dl .btn { font-size: 15px; padding: 12px 14px 9px; }
+  .cmd { flex-direction: column; }
+  .cmd code { font-size: 12px; }
+  .copy { padding: 11px 16px 9px; border-left: 0 !important; border-top: 2px solid var(--ink, #000) !important; }
+}
+details { border-top: 1px solid var(--line); padding: 4px 0; }
+details:last-of-type { border-bottom: 1px solid var(--line); }
+summary { cursor: pointer; padding: 12px 0; }
+details p { margin: 0 0 14px; }
+
+footer { padding-block: 28px 44px; font-size: 14px; }
+footer p { margin: 0 0 8px; max-width: 70ch; }
+</style>
+<link rel="stylesheet" href="/assets/fase.css?v=35e570a">
+<script type="module" src="/assets/depth.js?v=35e570a"></script>
+</head>
+<body>
+
+<div class="top gutter">
+  <div class="inner nav">
+    <a class="home" href="/">Johnny Hawk Audio</a>
+    <a href="https://johnnyhawk02.github.io/polivoks/" target="_blank" rel="noopener">Open the app</a>
+  </div>
+</div>
+
+<main>
+  <div class="gutter"><div class="inner hero">
+    <p class="eyebrow">FILTH · free plug-in</p>
+    <h1>Install FILTH</h1>
+    <p class="sub">FILTH is now a free plug-in too: VST3 for Mac (Apple Silicon and Intel), Windows and Linux, AU for Mac, and a standalone app. It has the same sound and the same 3D panel as the browser version. Its engine is a C++ port that gives exactly the same samples.</p>
+    <div class="try">
+      <p>Want to hear it first? It runs in your web browser, no install needed.</p>
+      <a class="btn ghost" href="https://johnnyhawk02.github.io/polivoks/" target="_blank" rel="noopener">Play in the browser</a>
+    </div>
+  </div></div>
+
+  <section class="section gutter" id="download"><div class="inner">
+    <h2>Download and install</h2>
+    <p>Download the zip for your computer, or copy the one-line install command and paste it into a terminal. The command downloads the newest version and puts the plug-in in the right folder.</p>
+    <p class="detected" id="detected" aria-live="polite"></p>
+
+    <div class="oses" id="oses">
+      <div class="os" id="mac">
+        <p class="badge you">Your computer</p>
+        <h3><span class="slab">macOS</span></h3>
+        <p class="for">Apple Silicon and Intel · VST3, AU and app</p>
+        <div class="dl">
+          <a class="btn" href="https://github.com/johnnyhawk02/polivoks/releases/latest/download/FILTH-VST3-macOS.zip">VST3 <small>zip</small></a>
+          <a class="btn" href="https://github.com/johnnyhawk02/polivoks/releases/latest/download/FILTH-AU-macOS.zip">AU <small>Logic, GarageBand</small></a>
+          <a class="btn ghost" href="https://github.com/johnnyhawk02/polivoks/releases/latest/download/FILTH-App-macOS.zip">App <small>zip</small></a>
+        </div>
+        <p class="cmd-label">Install VST3 and AU together (Terminal)</p>
+        <div class="cmd"><code data-cmd="curl -fsSL -o /tmp/FILTH-VST3.zip https://github.com/johnnyhawk02/polivoks/releases/latest/download/FILTH-VST3-macOS.zip &amp;&amp; curl -fsSL -o /tmp/FILTH-AU.zip https://github.com/johnnyhawk02/polivoks/releases/latest/download/FILTH-AU-macOS.zip &amp;&amp; mkdir -p ~/Library/Audio/Plug-Ins/VST3 ~/Library/Audio/Plug-Ins/Components &amp;&amp; rm -rf ~/Library/Audio/Plug-Ins/VST3/FILTH.vst3 ~/Library/Audio/Plug-Ins/Components/FILTH.component &amp;&amp; unzip -oq /tmp/FILTH-VST3.zip -d ~/Library/Audio/Plug-Ins/VST3 &amp;&amp; unzip -oq /tmp/FILTH-AU.zip -d ~/Library/Audio/Plug-Ins/Components &amp;&amp; xattr -dr com.apple.quarantine ~/Library/Audio/Plug-Ins/VST3/FILTH.vst3 ~/Library/Audio/Plug-Ins/Components/FILTH.component 2&gt;/dev/null; killall -9 AudioComponentRegistrar 2&gt;/dev/null; echo &quot;FILTH installed&quot;">curl -fsSL -o /tmp/FILTH-VST3.zip https://github.com/johnnyhawk02/polivoks/releases/latest/download/FILTH-VST3-macOS.zip &amp;&amp; curl -fsSL -o /tmp/FILTH-AU.zip https://github.com/johnnyhawk02/polivoks/releases/latest/download/FILTH-AU-macOS.zip &amp;&amp; mkdir -p ~/Library/Audio/Plug-Ins/VST3 ~/Library/Audio/Plug-Ins/Components &amp;&amp; rm -rf ~/Library/Audio/Plug-Ins/VST3/FILTH.vst3 ~/Library/Audio/Plug-Ins/Components/FILTH.component &amp;&amp; unzip -oq /tmp/FILTH-VST3.zip -d ~/Library/Audio/Plug-Ins/VST3 &amp;&amp; unzip -oq /tmp/FILTH-AU.zip -d ~/Library/Audio/Plug-Ins/Components &amp;&amp; xattr -dr com.apple.quarantine ~/Library/Audio/Plug-Ins/VST3/FILTH.vst3 ~/Library/Audio/Plug-Ins/Components/FILTH.component 2&gt;/dev/null; killall -9 AudioComponentRegistrar 2&gt;/dev/null; echo &quot;FILTH installed&quot;</code><button type="button" class="copy">Copy</button></div>
+        <p class="then">Open Terminal (<kbd>Cmd</kbd> + <kbd>Space</kbd>, type <b>Terminal</b>), paste, press <kbd>Return</kbd>. It ends with &ldquo;FILTH installed&rdquo;.</p>
+      </div>
+
+      <div class="os" id="windows">
+        <p class="badge you">Your computer</p>
+        <h3><span class="slab b">Windows</span></h3>
+        <p class="for">VST3 and app</p>
+        <div class="dl">
+          <a class="btn" href="https://github.com/johnnyhawk02/polivoks/releases/latest/download/FILTH-VST3-Windows.zip">VST3 <small>zip</small></a>
+          <a class="btn ghost" href="https://github.com/johnnyhawk02/polivoks/releases/latest/download/FILTH-App-Windows.zip">App <small>zip</small></a>
+        </div>
+        <p class="cmd-label">Install the VST3 (PowerShell, as administrator)</p>
+        <div class="cmd"><code data-cmd="curl.exe -fsSL -o &quot;$env:TEMP\FILTH-VST3.zip&quot; https://github.com/johnnyhawk02/polivoks/releases/latest/download/FILTH-VST3-Windows.zip; Remove-Item -Recurse -Force &quot;$env:CommonProgramFiles\VST3\FILTH.vst3&quot; -ErrorAction SilentlyContinue; Expand-Archive -Force &quot;$env:TEMP\FILTH-VST3.zip&quot; &quot;$env:CommonProgramFiles\VST3&quot;; &quot;FILTH installed&quot;">curl.exe -fsSL -o &quot;$env:TEMP\FILTH-VST3.zip&quot; https://github.com/johnnyhawk02/polivoks/releases/latest/download/FILTH-VST3-Windows.zip; Remove-Item -Recurse -Force &quot;$env:CommonProgramFiles\VST3\FILTH.vst3&quot; -ErrorAction SilentlyContinue; Expand-Archive -Force &quot;$env:TEMP\FILTH-VST3.zip&quot; &quot;$env:CommonProgramFiles\VST3&quot;; &quot;FILTH installed&quot;</code><button type="button" class="copy">Copy</button></div>
+        <p class="then">Click <b>Start</b>, type <b>PowerShell</b>, right-click it and choose <b>Run as administrator</b> (the VST3 folder is in Program Files). Paste, press <kbd>Enter</kbd>. It ends with &ldquo;FILTH installed&rdquo;.</p>
+      </div>
+
+      <div class="os" id="linux">
+        <p class="badge you">Your computer</p>
+        <h3><span class="slab">Linux</span></h3>
+        <p class="for">VST3 and app</p>
+        <div class="dl">
+          <a class="btn" href="https://github.com/johnnyhawk02/polivoks/releases/latest/download/FILTH-VST3-Linux.zip">VST3 <small>zip</small></a>
+          <a class="btn ghost" href="https://github.com/johnnyhawk02/polivoks/releases/latest/download/FILTH-App-Linux.zip">App <small>zip</small></a>
+        </div>
+        <p class="cmd-label">Install the VST3 (terminal)</p>
+        <div class="cmd"><code data-cmd="curl -fsSL -o /tmp/FILTH-VST3.zip https://github.com/johnnyhawk02/polivoks/releases/latest/download/FILTH-VST3-Linux.zip &amp;&amp; mkdir -p ~/.vst3 &amp;&amp; rm -rf ~/.vst3/FILTH.vst3 &amp;&amp; unzip -oq /tmp/FILTH-VST3.zip -d ~/.vst3 &amp;&amp; echo &quot;FILTH installed&quot;">curl -fsSL -o /tmp/FILTH-VST3.zip https://github.com/johnnyhawk02/polivoks/releases/latest/download/FILTH-VST3-Linux.zip &amp;&amp; mkdir -p ~/.vst3 &amp;&amp; rm -rf ~/.vst3/FILTH.vst3 &amp;&amp; unzip -oq /tmp/FILTH-VST3.zip -d ~/.vst3 &amp;&amp; echo &quot;FILTH installed&quot;</code><button type="button" class="copy">Copy</button></div>
+        <p class="then">Open a terminal (often <kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>T</kbd>), paste with <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>V</kbd>, press <kbd>Enter</kbd>. It ends with &ldquo;FILTH installed&rdquo;.</p>
+      </div>
+    </div>
+  </div></section>
+
+  <section class="section gutter" id="daw"><div class="inner">
+    <h2>Then rescan in your DAW</h2>
+    <p>After installing, your music software has to rescan its plug-ins before it sees FILTH. It appears as an <b>instrument</b> by <b>Johnny Hawk</b>. Put it on an instrument track.</p>
+    <ul class="rows">
+      <li><strong>Ableton Live</strong><span>Settings &gt; Plug-ins, turn on &ldquo;Use VST3 Plug-in System Folders&rdquo;, click Rescan.</span></li>
+      <li><strong>Logic Pro / GarageBand</strong><span>(Mac) It appears under Audio Units &gt; Johnny Hawk. If not, restart Logic.</span></li>
+      <li><strong>FL Studio</strong><span>Options &gt; Manage plugins &gt; Find plugins.</span></li>
+      <li><strong>Reaper</strong><span>Options &gt; Preferences &gt; Plug-ins &gt; VST &gt; Re-scan.</span></li>
+      <li><strong>Bitwig, Cubase, Studio One and others</strong><span>Rescan plug-ins or restart the DAW.</span></li>
+    </ul>
+    <p>Plug-in folders, if you&rsquo;re copying by hand or pointing your DAW at them:</p>
+    <ul class="rows">
+      <li><strong>macOS</strong><span><code>~/Library/Audio/Plug-Ins/VST3</code> and <code>~/Library/Audio/Plug-Ins/Components</code></span></li>
+      <li><strong>Windows</strong><span><code>C:\Program Files\Common Files\VST3</code></span></li>
+      <li><strong>Linux</strong><span><code>~/.vst3</code></span></li>
+    </ul>
+  </div></section>
+
+  <section class="section gutter" id="unsigned"><div class="inner">
+    <h2>Unsigned builds</h2>
+    <p>FILTH isn&rsquo;t signed by Apple or Microsoft, so your computer may warn you the first time. Here&rsquo;s what to do.</p>
+    <div class="note">
+      <h3>macOS</h3>
+      <p>The plug-in isn&rsquo;t notarised by Apple. The curl command above already clears the quarantine flag. If you download the zip in a browser instead, unzip it, move the plug-in into the folder, and run this in Terminal:</p>
+      <div class="cmd"><code data-cmd="xattr -dr com.apple.quarantine ~/Library/Audio/Plug-Ins/VST3/FILTH.vst3">xattr -dr com.apple.quarantine ~/Library/Audio/Plug-Ins/VST3/FILTH.vst3</code><button type="button" class="copy">Copy</button></div>
+      <p>and the same for <code>Components/FILTH.component</code>:</p>
+      <div class="cmd"><code data-cmd="xattr -dr com.apple.quarantine ~/Library/Audio/Plug-Ins/Components/FILTH.component">xattr -dr com.apple.quarantine ~/Library/Audio/Plug-Ins/Components/FILTH.component</code><button type="button" class="copy">Copy</button></div>
+      <p>Otherwise macOS says the plug-in &ldquo;is damaged&rdquo; or &ldquo;can&rsquo;t be opened&rdquo;. For the app, right-click it and choose <b>Open</b> the first time.</p>
+    </div>
+    <div class="note">
+      <h3>Windows</h3>
+      <p>The app isn&rsquo;t code-signed, so SmartScreen may show &ldquo;Windows protected your PC&rdquo;. Click <b>More info</b>, then <b>Run anyway</b>. The VST3 loads in the DAW without that warning.</p>
+      <p>It needs the Microsoft Edge WebView2 runtime, which comes with Windows 10 and 11.</p>
+    </div>
+    <div class="note">
+      <h3>Linux</h3>
+      <p>Needs WebKitGTK 4.1 and GTK 3. On Ubuntu 22.04 or newer:</p>
+      <div class="cmd"><code data-cmd="sudo apt install libwebkit2gtk-4.1-0 libgtk-3-0">sudo apt install libwebkit2gtk-4.1-0 libgtk-3-0</code><button type="button" class="copy">Copy</button></div>
+    </div>
+  </div></section>
+
+  <section class="section gutter" id="using"><div class="inner">
+    <h2>In your DAW</h2>
+    <ul class="rows">
+      <li><strong>Automation</strong><span>All 55 panel controls can be automated from the DAW.</span></li>
+      <li><strong>MIDI</strong><span>Works as on the web version: pitch bend, mod wheel and sustain.</span></li>
+      <li><strong>Tempo and transport</strong><span>The DAW&rsquo;s tempo and transport drive the sequencer and the synced echo.</span></li>
+      <li><strong>Presets</strong><span>Shared between plug-in instances.</span></li>
+      <li><strong>Latency</strong><span>128 samples, reported to the DAW so it is compensated.</span></li>
+    </ul>
+  </div></section>
+
+  <section class="section gutter" id="help"><div class="inner">
+    <h2>Updating and trouble</h2>
+    <p>To update, run the same install command again. It replaces FILTH with the newest version.</p>
+    <details><summary>Nothing shows up in my DAW</summary><p>Check the plug-in is in the folder listed above, then rescan. If it still isn&rsquo;t there, restart the DAW.</p></details>
+    <details><summary>My Mac says it &ldquo;is damaged&rdquo;</summary><p>You downloaded the zip in a browser. Use the Terminal command instead, or run the <code>xattr</code> commands in <a href="#unsigned">Unsigned builds</a>.</p></details>
+    <details><summary>The plug-in window is blank (Linux)</summary><p>Install WebKitGTK 4.1 and GTK 3: <code>sudo apt install libwebkit2gtk-4.1-0 libgtk-3-0</code>.</p></details>
+    <details><summary>Still stuck?</summary><p>Email <a href="mailto:hello@johnnyhawk.org">hello@johnnyhawk.org</a> and say which computer you have, which DAW, and what happened.</p></details>
+  </div></section>
+</main>
+
+<footer class="gutter"><div class="inner">
+  <p>FILTH is free, with no warranty.</p>
+  <p><a href="mailto:hello@johnnyhawk.org">hello@johnnyhawk.org</a> · <a href="/">Johnny Hawk Audio</a></p>
+</div></footer>
+
+<script>
+(function () {
+  // Copy buttons: copy the exact single-line command from data-cmd.
+  document.querySelectorAll(".cmd").forEach(function (box) {
+    var code = box.querySelector("code"), btn = box.querySelector(".copy");
+    var text = code.getAttribute("data-cmd");
+    function done() {
+      btn.textContent = "Copied!"; btn.classList.add("done");
+      setTimeout(function () { btn.textContent = "Copy"; btn.classList.remove("done"); }, 1800);
+    }
+    function fallback() {
+      var ta = document.createElement("textarea");
+      ta.value = text; ta.setAttribute("readonly", ""); ta.style.position = "fixed"; ta.style.opacity = "0";
+      document.body.appendChild(ta); ta.select();
+      var ok = false; try { ok = document.execCommand("copy"); } catch (e) {}
+      document.body.removeChild(ta);
+      if (ok) done(); else { var r = document.createRange(); r.selectNodeContents(code); var s = getSelection(); s.removeAllRanges(); s.addRange(r); btn.textContent = "Selected"; }
+    }
+    btn.addEventListener("click", function () {
+      if (navigator.clipboard && window.isSecureContext) navigator.clipboard.writeText(text).then(done, fallback);
+      else fallback();
+    });
+  });
+
+  // OS: mark the visitor's own computer and move it to the top. All three stay.
+  var ua = navigator.userAgent || "", plat = (navigator.userAgentData && navigator.userAgentData.platform) || navigator.platform || "";
+  var mobile = /iPhone|iPad|iPod|Android/i.test(ua);
+  var guess = null;
+  if (!mobile) {
+    if (/Win/i.test(plat + ua)) guess = "windows";
+    else if (/Mac/i.test(plat + ua)) guess = "mac";
+    else if (/Linux|X11|CrOS/i.test(plat + ua)) guess = "linux";
+  }
+  var hash = (location.hash || "").slice(1);
+  if (["mac", "windows", "linux"].indexOf(hash) > -1) guess = hash;
+  var msg = document.getElementById("detected");
+  if (guess) {
+    var box = document.getElementById(guess), list = document.getElementById("oses");
+    box.classList.add("mine");
+    list.insertBefore(box, list.firstChild);
+    msg.textContent = "It looks like you\u2019re on " + { mac: "a Mac", windows: "Windows", linux: "Linux" }[guess] + ", so that\u2019s first. The others are below.";
+  } else if (mobile) {
+    msg.textContent = "Reading on your phone? Pick the computer you\u2019ll install it on.";
+  }
+})();
+</script>
+
+</body>
+</html>

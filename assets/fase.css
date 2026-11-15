@@ -172,17 +172,35 @@ footer a:hover { color: var(--paper); }
 /* Extruded slabs: stacked hard shadows in deep magenta give each black label a side. */
 html:root { --side: #6a0052; }
 .slab, .hero h1 { filter: drop-shadow(.025em .035em 0 var(--side)) drop-shadow(.025em .035em 0 var(--side)) drop-shadow(.02em .03em 0 var(--side)); }
-/* Front title: matt black with a faint sheen. Each line gets a soft, wide
-   lift of light across the top that fades out, a barely-there rim on top,
-   and black depth plus a soft drop shadow. */
-#top .hero h1 { filter:
-  drop-shadow(0 -1px 0 rgba(255, 255, 255, .16))
-  drop-shadow(1px 2px 0 #000) drop-shadow(1px 2px 0 #000) drop-shadow(1px 2px 0 #111)
-  drop-shadow(6px 12px 10px rgba(40, 0, 30, .45)); }
-#top .hero h1 span {
-  background: linear-gradient(172deg, #3b3b3e 0%, #262628 22%, #161617 48%, #111112 72%, #1b1b1d 100%);
-  -webkit-background-clip: text; background-clip: text;
-  -webkit-text-fill-color: transparent; color: transparent;
+/* Front title: flat black lettering, about a millimetre thick, standing
+   at an angle in 3D space. The thin edge is a 2px lighter step; the soft
+   shadow on the pink shows it floating just off the page. depth.js nudges
+   the angle with the mouse (--ty/--tx). */
+#top .hero { perspective: 1100px; perspective-origin: 30% 50%; }
+#top .hero h1 {
+  color: #111;
+  transform: rotateY(calc(16deg + var(--ty, 0deg))) rotateX(calc(9deg + var(--tx, 0deg))) rotateZ(-2deg);
+  transform-origin: 0 50%;
+  transition: transform .4s ease-out;
+  filter: drop-shadow(1px 1px 0 #3a3a3c) drop-shadow(1px 1px 0 #2a2a2c)
+          drop-shadow(14px 22px 12px rgba(60, 0, 45, .32));
+}
+/* The ripple: a slow wave travels along the letters, lifting and turning
+   each one a few degrees, so the sheet and its thin edge undulate. */
+#top .hero h1 .w { display: inline-block; white-space: nowrap; font-style: normal; perspective: 900px; }
+#top .hero h1 .ch {
+  display: inline-block; font-style: normal;
+  animation: ripple 16s ease-in-out infinite;
+  animation-delay: calc(var(--i) * -0.7s);
+}
+@keyframes ripple {
+  0%, 100% { transform: translateZ(0) rotateY(0) rotateX(0); }
+  25% { transform: translateZ(9px) rotateY(-5deg) rotateX(1.5deg); }
+  50% { transform: translateZ(0) rotateY(0) rotateX(0); }
+  75% { transform: translateZ(-9px) rotateY(5deg) rotateX(-1.5deg); }
+}
+@media (max-width: 560px) {
+  #top .hero h1 { transform: rotateY(calc(12deg + var(--ty, 0deg))) rotateX(calc(7deg + var(--tx, 0deg))) rotateZ(-2deg); }
 }
 
 /* Buttons are blocks: they lift on hover and press in when clicked. */

@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Dipogon · Johnny Hawk Audio</title>
+<meta name="description" content="Dipogon is a free, open-source percussion synth where every key holds its own drum sound. Play it in your browser, or install it as a VST3 / AU plugin for Mac, Windows and Linux.">
+<meta name="theme-color" content="#fc0fc0">
+<meta property="og:title" content="Dipogon: a free percussion synth">
+<meta property="og:description" content="Every key on the keyboard holds its own drum sound. Free and open source, in the browser or as a plugin.">
+<meta property="og:image" content="https://johnnyhawk.org/dipogon/dipogon.jpg">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;700&family=Archivo+Black&family=Geist+Mono:wght@400;500&display=swap">
+<style>
+:root {
+  --bg: #fafaf9; --fg: #0c0d0e; --muted: #62666b; --line: #e4e4e2; --card: #ffffff;
+  --term: #1b1c1e; --term-fg: #e9eaec;
+  --sans: "Archivo", "Helvetica Neue", Arial, sans-serif;
+  --mono: "Geist Mono", ui-monospace, Menlo, monospace;
+}
+:root { padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px); }
+body { margin: 0; background: var(--bg); color: var(--fg); font-family: var(--sans); font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+.gutter { padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.inner { max-width: 820px; margin: 0 auto; }
+a { color: inherit; }
+code { font-family: var(--mono); font-size: .92em; overflow-wrap: anywhere; }
+p code, li code { padding: 1px 5px; }
+kbd { font: 500 12.5px var(--mono); padding: 1px 6px; white-space: nowrap; }
+
+.nav { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 14px; font-size: 14px; }
+.btn { display: inline-flex; align-items: center; gap: 8px; }
+
+.hero { padding-block: 44px 36px; display: flex; flex-direction: column; gap: 16px; }
+.eyebrow { font: 500 12px var(--mono); text-transform: uppercase; letter-spacing: .1em; margin: 0; }
+.sub { margin: 0; }
+.try { padding: 14px 16px; font-size: 15px; display: flex; gap: 12px; align-items: center; justify-content: space-between; flex-wrap: wrap; }
+.try p { margin: 0; }
+
+.section { padding-block: 44px; }
+.section p { margin: 0 0 12px; max-width: 62ch; }
+.muted { color: var(--muted); }
+
+/* One block per OS, all shown. The visitor's own is moved first and marked. */
+.oses { display: flex; flex-direction: column; gap: 26px; margin-top: 8px; }
+.os { position: relative; border: 2px solid var(--ink, #000); background: var(--paper, #fff); padding: 20px 20px 22px; }
+.os h3 { margin: 0 0 4px; font-size: clamp(28px, 4.4vw, 40px); line-height: .95; }
+.os .for { margin: 0 0 16px; font-size: 15px; color: var(--muted); }
+.os .you { display: none; position: absolute; top: -14px; right: 16px; margin: 0; }
+.os.mine { border-width: 3px; box-shadow: 10px 10px 0 var(--pink, #fc0fc0), 10px 10px 0 2px var(--ink, #000); transform: rotate(-.5deg); }
+.os.mine .you { display: inline-block; }
+.os.mine h3 .slab { font-size: 1em; }
+.dl { display: flex; flex-wrap: wrap; gap: 12px 14px; margin: 0 0 20px; }
+.dl .btn { font-size: 17px; padding: 14px 20px 11px; }
+.dl .btn small { font: 500 12px var(--sans); text-transform: none; letter-spacing: 0; opacity: .8; }
+.os .where { font-size: 15px; margin: 0 0 8px; max-width: none; }
+
+.cmd-label { font: 500 12px var(--mono); text-transform: uppercase; letter-spacing: .08em; margin: 0 0 8px; }
+.cmd { display: flex; align-items: stretch; overflow: hidden; background: var(--term); color: var(--term-fg); margin-bottom: 12px; }
+.cmd code { flex: 1; min-width: 0; font: 400 13px/1.55 var(--mono); padding: 12px 14px; white-space: pre-wrap; word-break: break-all; overflow-wrap: anywhere; user-select: all; -webkit-user-select: all; }
+.copy { flex: none; min-width: 84px; padding: 0 16px; cursor: pointer; border: 0; }
+.os .cmd { margin-bottom: 0; }
+.os .then { font-size: 15px; margin: 12px 0 0; max-width: none; }
+
+.detected { font-size: 15px; margin: 0 0 6px; min-height: 1.6em; font-weight: 500; }
+
+.note { padding: 16px 18px; margin: 20px 0 0; font-size: 15px; }
+.note p { margin: 0 0 8px; } .note p:last-child { margin: 0; }
+.note .cmd { margin: 10px 0 10px; }
+.note h3 { margin: 0 0 8px; }
+
+.rows { list-style: none; margin: 0 0 16px; padding: 0; border-top: 1px solid var(--line); }
+.rows li { display: grid; grid-template-columns: 190px 1fr; gap: 16px; padding: 13px 0; border-bottom: 1px solid var(--line); font-size: 15px; }
+.rows li > strong { font-weight: 700; }
+@media (max-width: 560px) {
+  .rows li { grid-template-columns: 1fr; gap: 2px; }
+  .os { padding: 18px 14px 18px; }
+  .os.mine { box-shadow: 6px 6px 0 var(--pink, #fc0fc0), 6px 6px 0 2px var(--ink, #000); }
+  .dl .btn { font-size: 15px; padding: 12px 14px 9px; }
+  .cmd { flex-direction: column; }
+  .cmd code { font-size: 12px; }
+  .copy { padding: 11px 16px 9px; border-left: 0 !important; border-top: 2px solid var(--ink, #000) !important; }
+}
+details { border-top: 1px solid var(--line); padding: 4px 0; }
+details:last-of-type { border-bottom: 1px solid var(--line); }
+summary { cursor: pointer; padding: 12px 0; }
+details p { margin: 0 0 14px; }
+
+footer { padding-block: 28px 44px; font-size: 14px; }
+footer p { margin: 0 0 8px; max-width: 70ch; }
+
+/* Dipogon page extras */
+.hero h1 { font-size: clamp(64px, 15vw, 150px); line-height: .85; }
+.bigplay { font-size: clamp(30px, 5.6vw, 54px) !important; padding: 18px 34px 12px !important; transform: rotate(-2deg); align-self: flex-start; }
+.bigplay::before { clip-path: polygon(0 10%, 100% 0, 97% 100%, 3% 90%); }
+.free { font: 400 clamp(20px, 3vw, 28px)/1 var(--display); text-transform: uppercase; margin: 6px 0 0; }
+.shot { margin: 8px 0 0; border: 3px solid var(--ink, #000); background: #111; box-shadow: 12px 12px 0 var(--ink, #000); transform: rotate(-.8deg); }
+.shot img { display: block; width: 100%; height: auto; }
+.shot-wrap { max-width: 1100px; }
+.shot-cap { font-size: 14px; margin: 18px 0 0; }
+.credit { border: 3px solid var(--ink, #000); background: var(--paper, #fff); padding: 20px; box-shadow: 8px 8px 0 var(--pink, #fc0fc0), 8px 8px 0 2px var(--ink, #000); transform: rotate(.4deg); margin: 18px 0 0; }
+.credit p:last-child { margin-bottom: 0; }
+.beta { margin-left: 8px; vertical-align: middle; }
+.links-row { display: flex; flex-wrap: wrap; gap: 12px 14px; margin: 18px 0 0; }
+.links-row .btn { font-size: 17px; padding: 14px 20px 11px; }
+@media (max-width: 560px) {
+  .bigplay { font-size: 28px !important; padding: 14px 22px 9px !important; }
+  .shot { box-shadow: 6px 6px 0 var(--ink, #000); }
+  .credit { padding: 16px 14px; }
+}
+</style>
+<link rel="stylesheet" href="/assets/fase.css?v=35e570a">
+<script type="module" src="/assets/depth.js?v=35e570a"></script>
+</head>
+<body>
+
+<div class="top gutter">
+  <div class="inner nav">
+    <a class="home" href="/">Johnny Hawk Audio</a>
+    <a href="https://dipogon.johnnyhawk.org" target="_blank" rel="noopener">Open the app</a>
+  </div>
+</div>
+
+<main>
+  <div class="gutter"><div class="inner hero">
+    <p class="eyebrow">Percussion synth · browser and plugin · free and open source</p>
+    <h1>Dipogon</h1>
+    <p class="sub">A percussion synth where every key on the keyboard holds its own drum sound. Roll new sounds, glide and morph from key to key, and shape the whole kit with 8 macro knobs.</p>
+    <a class="btn bigplay" href="https://dipogon.johnnyhawk.org" target="_blank" rel="noopener">Play in browser</a>
+    <p class="free">Free, forever.</p>
+  </div></div>
+
+  <div class="gutter"><div class="inner shot-wrap">
+    <figure class="shot" style="margin-left:0;margin-right:0">
+      <picture>
+        <source srcset="/dipogon/dipogon.webp" type="image/webp">
+        <img src="/dipogon/dipogon.jpg" width="2000" height="1250" alt="The Dipogon panel: 8 macro knobs along the top, a keyboard split into three engines, then oscillator, pitch, noise, click, filter with its curve display, amp, LFO, mix and a 16-step sequencer.">
+      </picture>
+    </figure>
+    <p class="shot-cap">Dipogon running in the browser. The plugin is the same panel.</p>
+  </div></div>
+
+  <section class="section gutter" id="what"><div class="inner">
+    <h2>What it is</h2>
+    <p>Play a key, turn a knob, and the change stays on that key. One keyboard becomes a whole kit, and every key can be something different. It runs in your browser and as a plugin: VST3 and AU on a Mac, VST3 on Windows and Linux.</p>
+    <ul class="rows">
+      <li><strong>Every key, its own sound</strong><span>Each key keeps its own drum. Don&rsquo;t like one? Roll a new sound for it, or deal a whole new kit.</span></li>
+      <li><strong>Glide and morph</strong><span>Slide and morph from one key&rsquo;s sound to the next.</span></li>
+      <li><strong>8 macro knobs</strong><span>Shape everything at once. MIDI-map them to your controller and automate them from your DAW.</span></li>
+      <li><strong>Sound sources</strong><span>Wavetable oscillators, FM, noise and a click layer.</span></li>
+      <li><strong>Shaping</strong><span>Filters with a live curve display, and drive.</span></li>
+      <li><strong>Effects</strong><span>Echo and reverb.</span></li>
+      <li><strong>Modulation</strong><span>Per-knob modulation, with a step sequencer.</span></li>
+    </ul>
+  </div></section>
+
+  <section class="section gutter" id="story"><div class="inner">
+    <h2>How it came about</h2>
+    <p>The idea comes from AFX mode on the Novation Bass Station II, where every key can hold its own sound. I wanted that idea as a full drum synth.</p>
+    <div class="credit">
+      <h3 style="margin-top:0"><span class="slab">Built on the Sonic Potions LXR</span></h3>
+      <p>Dipogon&rsquo;s drum voices come from the <b>Sonic Potions LXR</b>, an open-source DIY drum machine designed by Julian Schmidt. Its engine is ported from the LXR firmware, as carried on in the LXR-02. Huge thanks to Sonic Potions for making it open.</p>
+      <p class="muted" style="font-size:14px">Dipogon is unofficial: it isn&rsquo;t made, approved or endorsed by Sonic Potions or Erica Synths. &ldquo;LXR&rdquo; and &ldquo;LXR-02&rdquo; are trademarks of Erica Synths.</p>
+    </div>
+  </div></section>
+
+  <section class="section gutter" id="install"><div class="inner">
+    <h2>Install the plugin</h2>
+    <p>Free, for Mac, Windows and Linux. Pick your computer below, then rescan plugins in your DAW. It appears as an instrument called <b>Dipogon</b>.</p>
+    <p class="detected" id="detected" aria-live="polite"></p>
+
+    <div class="oses" id="oses">
+      <div class="os" id="mac">
+        <p class="badge you">Your computer</p>
+        <h3><span class="slab">macOS</span></h3>
+        <p class="for">Apple Silicon and Intel · VST3, AU and app</p>
+        <p class="cmd-label">Paste into Terminal</p>
+        <div class="cmd"><code data-cmd="curl -fsSL https://github.com/johnnyhawk02/lxr-afx/releases/download/plugin-latest/install.sh | bash">curl -fsSL https://github.com/johnnyhawk02/lxr-afx/releases/download/plugin-latest/install.sh | bash</code><button type="button" class="copy">Copy</button></div>
+        <p class="then">Open Terminal (<kbd>Cmd</kbd> + <kbd>Space</kbd>, type <b>Terminal</b>), paste, press <kbd>Return</kbd>. It installs the VST3, the AU and the app. Run it again any time to update.</p>
+        <p class="then"><b>Why Terminal and not a download?</b> I don&rsquo;t have a paid Apple developer account, so the plugin isn&rsquo;t signed by Apple. If you download it in a browser, macOS blocks it. Fetched from Terminal it installs without any fuss. The script is short, so feel free to <a href="https://github.com/johnnyhawk02/lxr-afx/releases/download/plugin-latest/install.sh">read it first</a>.</p>
+      </div>
+
+      <div class="os" id="windows">
+        <p class="badge you">Your computer</p>
+        <h3><span class="slab b">Windows</span></h3>
+        <p class="for">64-bit Windows 10 and 11 · VST3 <span class="badge beta">New · beta</span></p>
+        <div class="dl">
+          <a class="btn" href="https://github.com/johnnyhawk02/lxr-afx/releases/download/plugin-latest/Dipogon-windows-vst3.zip">VST3 <small>zip</small></a>
+          <a class="btn ghost" href="https://github.com/johnnyhawk02/lxr-afx/releases/download/plugin-latest/Dipogon-windows-app.zip">App <small>zip</small></a>
+        </div>
+        <p class="where">Unzip it and put the <b>Dipogon.vst3</b> folder in <code>C:\Program Files\Common Files\VST3</code>, then rescan plugins.</p>
+        <p class="then">Windows may warn that it&rsquo;s from an unknown publisher. Click <b>More info</b>, then choose <b>Run anyway</b>.</p>
+      </div>
+
+      <div class="os" id="linux">
+        <p class="badge you">Your computer</p>
+        <h3><span class="slab">Linux</span></h3>
+        <p class="for">x86_64 · VST3 <span class="badge beta">New · beta</span></p>
+        <div class="dl">
+          <a class="btn" href="https://github.com/johnnyhawk02/lxr-afx/releases/download/plugin-latest/Dipogon-linux-vst3.zip">VST3 <small>zip</small></a>
+          <a class="btn ghost" href="https://github.com/johnnyhawk02/lxr-afx/releases/download/plugin-latest/Dipogon-linux-app.zip">App <small>zip</small></a>
+        </div>
+        <p class="where">Unzip it into <code>~/.vst3</code>, then rescan plugins.</p>
+        <p class="then">It needs WebKitGTK. On Debian or Ubuntu: <code>sudo apt install libwebkit2gtk-4.1-0</code></p>
+      </div>
+    </div>
+    <p style="margin-top:22px">The Windows and Linux builds are brand new and haven&rsquo;t been tried in many DAWs yet. If something goes wrong, email <a href="mailto:hello@johnnyhawk.org">hello@johnnyhawk.org</a> and say which computer and DAW you have.</p>
+  </div></section>
+
+  <section class="section gutter" id="daw"><div class="inner">
+    <h2>Then rescan in your DAW</h2>
+    <ul class="rows">
+      <li><strong>Ableton Live</strong><span>Settings &gt; Plug-ins, turn on &ldquo;Use VST3 Plug-in System Folders&rdquo;, click Rescan.</span></li>
+      <li><strong>Logic Pro / GarageBand</strong><span>(Mac) It appears under Audio Units. If not, restart Logic.</span></li>
+      <li><strong>FL Studio</strong><span>Options &gt; Manage plugins &gt; Find plugins.</span></li>
+      <li><strong>Reaper</strong><span>Options &gt; Preferences &gt; Plug-ins &gt; VST &gt; Re-scan.</span></li>
+      <li><strong>Bitwig, Cubase, Studio One and others</strong><span>Rescan plugins or restart the DAW.</span></li>
+    </ul>
+  </div></section>
+
+  <section class="section gutter" id="source"><div class="inner">
+    <h2>Free and open source</h2>
+    <p>Dipogon is free, forever, and its source code is GPL, like the LXR firmware it&rsquo;s built on.</p>
+    <div class="links-row">
+      <a class="btn" href="https://github.com/johnnyhawk02/lxr-afx" target="_blank" rel="noopener">Source code <small>GPL</small></a>
+      <a class="btn ghost" href="https://github.com/johnnyhawk02/lxr-afx/releases/tag/plugin-latest" target="_blank" rel="noopener">All plugin downloads</a>
+    </div>
+  </div></section>
+</main>
+
+<footer class="gutter"><div class="inner">
+  <p>Dipogon is free, with no warranty. Drum voices from the Sonic Potions LXR.</p>
+  <p><a href="mailto:hello@johnnyhawk.org">hello@johnnyhawk.org</a> · <a href="/">Johnny Hawk Audio</a></p>
+</div></footer>
+
+<script>
+(function () {
+  // Copy buttons: copy the exact single-line command from data-cmd.
+  document.querySelectorAll(".cmd").forEach(function (box) {
+    var code = box.querySelector("code"), btn = box.querySelector(".copy");
+    var text = code.getAttribute("data-cmd");
+    function done() {
+      btn.textContent = "Copied!"; btn.classList.add("done");
+      setTimeout(function () { btn.textContent = "Copy"; btn.classList.remove("done"); }, 1800);
+    }
+    function fallback() {
+      var ta = document.createElement("textarea");
+      ta.value = text; ta.setAttribute("readonly", ""); ta.style.position = "fixed"; ta.style.opacity = "0";
+      document.body.appendChild(ta); ta.select();
+      var ok = false; try { ok = document.execCommand("copy"); } catch (e) {}
+      document.body.removeChild(ta);
+      if (ok) done(); else { var r = document.createRange(); r.selectNodeContents(code); var s = getSelection(); s.removeAllRanges(); s.addRange(r); btn.textContent = "Selected"; }
+    }
+    btn.addEventListener("click", function () {
+      if (navigator.clipboard && window.isSecureContext) navigator.clipboard.writeText(text).then(done, fallback);
+      else fallback();
+    });
+  });
+
+  // OS: mark the visitor's own computer and move it to the top. All three stay.
+  var ua = navigator.userAgent || "", plat = (navigator.userAgentData && navigator.userAgentData.platform) || navigator.platform || "";
+  var mobile = /iPhone|iPad|iPod|Android/i.test(ua);
+  var guess = null;
+  if (!mobile) {
+    if (/Win/i.test(plat + ua)) guess = "windows";
+    else if (/Mac/i.test(plat + ua)) guess = "mac";
+    else if (/Linux|X11|CrOS/i.test(plat + ua)) guess = "linux";
+  }
+  var hash = (location.hash || "").slice(1);
+  if (["mac", "windows", "linux"].indexOf(hash) > -1) guess = hash;
+  var msg = document.getElementById("detected");
+  if (guess) {
+    var box = document.getElementById(guess), list = document.getElementById("oses");
+    box.classList.add("mine");
+    list.insertBefore(box, list.firstChild);
+    msg.textContent = "It looks like you\u2019re on " + { mac: "a Mac", windows: "Windows", linux: "Linux" }[guess] + ", so that\u2019s first. The others are below.";
+  } else if (mobile) {
+    msg.textContent = "Reading on your phone? Pick the computer you\u2019ll install it on.";
+  }
+})();
+</script>
+
+</body>
+</html>

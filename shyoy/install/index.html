@@ -1,0 +1,283 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Install Shyoy · Johnny Hawk Audio</title>
+<meta name="description" content="Download and install Shyoy, a free monosynth plug-in: VST3 for Mac, Windows and Linux, AU for Mac, and a standalone app.">
+<meta name="theme-color" content="#fc0fc0">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;700&family=Archivo+Black&family=Geist+Mono:wght@400;500&display=swap">
+<style>
+:root {
+  --bg: #fafaf9; --fg: #0c0d0e; --muted: #62666b; --line: #e4e4e2; --card: #ffffff;
+  --term: #1b1c1e; --term-fg: #e9eaec;
+  --sans: "Archivo", "Helvetica Neue", Arial, sans-serif;
+  --mono: "Geist Mono", ui-monospace, Menlo, monospace;
+}
+:root { padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px); }
+body { margin: 0; background: var(--bg); color: var(--fg); font-family: var(--sans); font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+.gutter { padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.inner { max-width: 820px; margin: 0 auto; }
+a { color: inherit; }
+code { font-family: var(--mono); font-size: .92em; overflow-wrap: anywhere; }
+p code, li code { padding: 1px 5px; }
+kbd { font: 500 12.5px var(--mono); padding: 1px 6px; white-space: nowrap; }
+
+.nav { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 14px; font-size: 14px; }
+.btn { display: inline-flex; align-items: center; gap: 8px; }
+
+.hero { padding-block: 44px 36px; display: flex; flex-direction: column; gap: 16px; }
+.eyebrow { font: 500 12px var(--mono); text-transform: uppercase; letter-spacing: .1em; margin: 0; }
+.sub { margin: 0; }
+.try { padding: 14px 16px; font-size: 15px; display: flex; gap: 12px; align-items: center; justify-content: space-between; flex-wrap: wrap; }
+.try p { margin: 0; }
+
+.section { padding-block: 44px; }
+.section p { margin: 0 0 12px; max-width: 62ch; }
+.muted { color: var(--muted); }
+
+/* One block per OS, all shown. The visitor's own is moved first and marked. */
+.oses { display: flex; flex-direction: column; gap: 26px; margin-top: 8px; }
+.os { position: relative; border: 2px solid var(--ink, #000); background: var(--paper, #fff); padding: 20px 20px 22px; }
+.os h3 { margin: 0 0 4px; font-size: clamp(28px, 4.4vw, 40px); line-height: .95; }
+.os .for { margin: 0 0 16px; font-size: 15px; color: var(--muted); }
+.os .you { display: none; position: absolute; top: -14px; right: 16px; margin: 0; }
+.os.mine { border-width: 3px; box-shadow: 10px 10px 0 var(--pink, #fc0fc0), 10px 10px 0 2px var(--ink, #000); transform: rotate(-.5deg); }
+.os.mine .you { display: inline-block; }
+.os.mine h3 .slab { font-size: 1em; }
+.dl { display: flex; flex-wrap: wrap; gap: 12px 14px; margin: 0 0 20px; }
+.dl .btn { font-size: 17px; padding: 14px 20px 11px; }
+.dl .btn small { font: 500 12px var(--sans); text-transform: none; letter-spacing: 0; opacity: .8; }
+.os .where { font-size: 15px; margin: 0 0 8px; max-width: none; }
+
+.cmd-label { font: 500 12px var(--mono); text-transform: uppercase; letter-spacing: .08em; margin: 0 0 8px; }
+.cmd { display: flex; align-items: stretch; overflow: hidden; background: var(--term); color: var(--term-fg); margin-bottom: 12px; }
+.cmd code { flex: 1; min-width: 0; font: 400 13px/1.55 var(--mono); padding: 12px 14px; white-space: pre-wrap; word-break: break-all; overflow-wrap: anywhere; user-select: all; -webkit-user-select: all; }
+.copy { flex: none; min-width: 84px; padding: 0 16px; cursor: pointer; border: 0; }
+.os .cmd { margin-bottom: 0; }
+.os .then { font-size: 15px; margin: 12px 0 0; max-width: none; }
+
+.detected { font-size: 15px; margin: 0 0 6px; min-height: 1.6em; font-weight: 500; }
+
+.note { padding: 16px 18px; margin: 20px 0 0; font-size: 15px; }
+.note p { margin: 0 0 8px; } .note p:last-child { margin: 0; }
+.note .cmd { margin: 10px 0 10px; }
+.note h3 { margin: 0 0 8px; }
+
+.rows { list-style: none; margin: 0 0 16px; padding: 0; border-top: 1px solid var(--line); }
+.rows li { display: grid; grid-template-columns: 190px 1fr; gap: 16px; padding: 13px 0; border-bottom: 1px solid var(--line); font-size: 15px; }
+.rows li > strong { font-weight: 700; }
+@media (max-width: 560px) {
+  .rows li { grid-template-columns: 1fr; gap: 2px; }
+  .os { padding: 18px 14px 18px; }
+  .os.mine { box-shadow: 6px 6px 0 var(--pink, #fc0fc0), 6px 6px 0 2px var(--ink, #000); }
+  .dl .btn { font-size: 15px; padding: 12px 14px 9px; }
+  .cmd { flex-direction: column; }
+  .cmd code { font-size: 12px; }
+  .copy { padding: 11px 16px 9px; border-left: 0 !important; border-top: 2px solid var(--ink, #000) !important; }
+}
+details { border-top: 1px solid var(--line); padding: 4px 0; }
+details:last-of-type { border-bottom: 1px solid var(--line); }
+summary { cursor: pointer; padding: 12px 0; }
+details p { margin: 0 0 14px; }
+
+footer { padding-block: 28px 44px; font-size: 14px; }
+footer p { margin: 0 0 8px; max-width: 70ch; }
+</style>
+<link rel="stylesheet" href="/assets/fase.css?v=35e570a">
+<script type="module" src="/assets/depth.js?v=35e570a"></script>
+</head>
+<body>
+
+<div class="top gutter">
+  <div class="inner nav">
+    <a class="home" href="/">Johnny Hawk Audio</a>
+    <a href="https://shyoy.pages.dev" target="_blank" rel="noopener">Open the app</a>
+  </div>
+</div>
+
+<main>
+  <div class="gutter"><div class="inner hero">
+    <p class="eyebrow">Shyoy · free plug-in · beta</p>
+    <h1>Install Shyoy</h1>
+    <p class="sub">Shyoy is a monosynth modelled on the circuit of a classic 1980s single-oscillator analogue synth. The VCO, sub-oscillator, ladder-style filter, envelope and VCA run as circuit simulations using the original schematic values. The plug-in is VST3 for Mac (Apple Silicon and Intel), Windows and Linux, AU for Mac, and a standalone app. It is the same synth as the browser version: its output matches sample for sample.</p>
+    <div class="try">
+      <p>Want to hear it first? It runs in Chrome or Edge, no install needed.</p>
+      <a class="btn ghost" href="https://shyoy.pages.dev" target="_blank" rel="noopener">Play in the browser</a>
+    </div>
+    <div class="try">
+      <p>New to Shyoy? Four pages on the panel, the sequencer and the randomiser.</p>
+      <a class="btn ghost" href="/shyoy/shyoy-quick-start.pdf" target="_blank" rel="noopener">Quick start guide (PDF)</a>
+    </div>
+  </div></div>
+
+  <section class="section gutter" id="download"><div class="inner">
+    <h2>Download and install</h2>
+    <p>Download the zip for your computer, or copy the one-line install command and paste it into a terminal. The command downloads the newest build and puts the plug-in in the right folder.</p>
+    <p class="detected" id="detected" aria-live="polite"></p>
+
+    <div class="oses" id="oses">
+      <div class="os" id="mac">
+        <p class="badge you">Your computer</p>
+        <h3><span class="slab">macOS</span></h3>
+        <p class="for">macOS 11 Big Sur or later · Apple Silicon and Intel · VST3, AU and app</p>
+        <div class="dl">
+          <a class="btn" href="https://github.com/johnnyhawk02/Sh101/releases/download/plugin-latest/Shyoy-macOS.zip">Download <small>zip, 20 MB</small></a>
+        </div>
+        <p class="cmd-label">Install VST3 and AU together (Terminal)</p>
+        <div class="cmd"><code data-cmd="cd /tmp &amp;&amp; curl -fsSL -o Shyoy-macOS.zip https://github.com/johnnyhawk02/Sh101/releases/download/plugin-latest/Shyoy-macOS.zip &amp;&amp; rm -rf Shyoy &amp;&amp; unzip -q Shyoy-macOS.zip &amp;&amp; mkdir -p ~/Library/Audio/Plug-Ins/VST3 ~/Library/Audio/Plug-Ins/Components &amp;&amp; rm -rf ~/Library/Audio/Plug-Ins/VST3/Shyoy.vst3 ~/Library/Audio/Plug-Ins/Components/Shyoy.component &amp;&amp; cp -R Shyoy/Shyoy.vst3 ~/Library/Audio/Plug-Ins/VST3/ &amp;&amp; cp -R Shyoy/Shyoy.component ~/Library/Audio/Plug-Ins/Components/ &amp;&amp; xattr -dr com.apple.quarantine ~/Library/Audio/Plug-Ins/VST3/Shyoy.vst3 ~/Library/Audio/Plug-Ins/Components/Shyoy.component &amp;&amp; echo &quot;Shyoy installed&quot;">cd /tmp &amp;&amp; curl -fsSL -o Shyoy-macOS.zip https://github.com/johnnyhawk02/Sh101/releases/download/plugin-latest/Shyoy-macOS.zip &amp;&amp; rm -rf Shyoy &amp;&amp; unzip -q Shyoy-macOS.zip &amp;&amp; mkdir -p ~/Library/Audio/Plug-Ins/VST3 ~/Library/Audio/Plug-Ins/Components &amp;&amp; rm -rf ~/Library/Audio/Plug-Ins/VST3/Shyoy.vst3 ~/Library/Audio/Plug-Ins/Components/Shyoy.component &amp;&amp; cp -R Shyoy/Shyoy.vst3 ~/Library/Audio/Plug-Ins/VST3/ &amp;&amp; cp -R Shyoy/Shyoy.component ~/Library/Audio/Plug-Ins/Components/ &amp;&amp; xattr -dr com.apple.quarantine ~/Library/Audio/Plug-Ins/VST3/Shyoy.vst3 ~/Library/Audio/Plug-Ins/Components/Shyoy.component &amp;&amp; echo &quot;Shyoy installed&quot;</code><button type="button" class="copy">Copy</button></div>
+        <p class="then">Open Terminal (<kbd>Cmd</kbd> + <kbd>Space</kbd>, type <b>Terminal</b>), paste, press <kbd>Return</kbd>. It ends with &ldquo;Shyoy installed&rdquo;.</p>
+        <p class="cmd-label" style="margin-top:18px">Optional: the standalone app (run after the line above)</p>
+        <div class="cmd"><code data-cmd="cp -R /tmp/Shyoy/Shyoy.app /Applications/ &amp;&amp; xattr -dr com.apple.quarantine /Applications/Shyoy.app">cp -R /tmp/Shyoy/Shyoy.app /Applications/ &amp;&amp; xattr -dr com.apple.quarantine /Applications/Shyoy.app</code><button type="button" class="copy">Copy</button></div>
+      </div>
+
+      <div class="os" id="windows">
+        <p class="badge you">Your computer</p>
+        <h3><span class="slab b">Windows</span></h3>
+        <p class="for">Windows 10 or 11, 64-bit · VST3 and app</p>
+        <div class="dl">
+          <a class="btn" href="https://github.com/johnnyhawk02/Sh101/releases/download/plugin-latest/Shyoy-Windows.zip">Download <small>zip, 8.5 MB</small></a>
+        </div>
+        <p class="cmd-label">Install the VST3 (PowerShell, as administrator)</p>
+        <div class="cmd"><code data-cmd="curl.exe -fsSL -o &quot;$env:TEMP\Shyoy-Windows.zip&quot; https://github.com/johnnyhawk02/Sh101/releases/download/plugin-latest/Shyoy-Windows.zip; Expand-Archive -Force &quot;$env:TEMP\Shyoy-Windows.zip&quot; &quot;$env:TEMP\Shyoy&quot;; New-Item -ItemType Directory -Force &quot;C:\Program Files\Common Files\VST3&quot; | Out-Null; Remove-Item -Recurse -Force &quot;C:\Program Files\Common Files\VST3\Shyoy.vst3&quot; -ErrorAction SilentlyContinue; Copy-Item -Recurse &quot;$env:TEMP\Shyoy\Shyoy\Shyoy.vst3&quot; &quot;C:\Program Files\Common Files\VST3\&quot;; Write-Host &quot;Shyoy installed&quot;">curl.exe -fsSL -o &quot;$env:TEMP\Shyoy-Windows.zip&quot; https://github.com/johnnyhawk02/Sh101/releases/download/plugin-latest/Shyoy-Windows.zip; Expand-Archive -Force &quot;$env:TEMP\Shyoy-Windows.zip&quot; &quot;$env:TEMP\Shyoy&quot;; New-Item -ItemType Directory -Force &quot;C:\Program Files\Common Files\VST3&quot; | Out-Null; Remove-Item -Recurse -Force &quot;C:\Program Files\Common Files\VST3\Shyoy.vst3&quot; -ErrorAction SilentlyContinue; Copy-Item -Recurse &quot;$env:TEMP\Shyoy\Shyoy\Shyoy.vst3&quot; &quot;C:\Program Files\Common Files\VST3\&quot;; Write-Host &quot;Shyoy installed&quot;</code><button type="button" class="copy">Copy</button></div>
+        <p class="then">Click <b>Start</b>, type <b>PowerShell</b>, right-click it and choose <b>Run as administrator</b> (the VST3 folder is in Program Files). Paste, press <kbd>Enter</kbd>. It ends with &ldquo;Shyoy installed&rdquo;. The standalone app is <code>Shyoy.exe</code> in <code>%TEMP%\Shyoy\Shyoy\</code>. You can copy it anywhere.</p>
+      </div>
+
+      <div class="os" id="linux">
+        <p class="badge you">Your computer</p>
+        <h3><span class="slab">Linux</span></h3>
+        <p class="for">x86-64 · VST3 and app</p>
+        <div class="dl">
+          <a class="btn" href="https://github.com/johnnyhawk02/Sh101/releases/download/plugin-latest/Shyoy-Linux.zip">Download <small>zip, 7.5 MB</small></a>
+        </div>
+        <p class="cmd-label">Install the VST3 (terminal)</p>
+        <div class="cmd"><code data-cmd="cd /tmp &amp;&amp; curl -fsSL -o Shyoy-Linux.zip https://github.com/johnnyhawk02/Sh101/releases/download/plugin-latest/Shyoy-Linux.zip &amp;&amp; rm -rf Shyoy &amp;&amp; unzip -q Shyoy-Linux.zip &amp;&amp; mkdir -p ~/.vst3 &amp;&amp; rm -rf ~/.vst3/Shyoy.vst3 &amp;&amp; cp -R Shyoy/Shyoy.vst3 ~/.vst3/ &amp;&amp; echo &quot;Shyoy installed&quot;">cd /tmp &amp;&amp; curl -fsSL -o Shyoy-Linux.zip https://github.com/johnnyhawk02/Sh101/releases/download/plugin-latest/Shyoy-Linux.zip &amp;&amp; rm -rf Shyoy &amp;&amp; unzip -q Shyoy-Linux.zip &amp;&amp; mkdir -p ~/.vst3 &amp;&amp; rm -rf ~/.vst3/Shyoy.vst3 &amp;&amp; cp -R Shyoy/Shyoy.vst3 ~/.vst3/ &amp;&amp; echo &quot;Shyoy installed&quot;</code><button type="button" class="copy">Copy</button></div>
+        <p class="then">Open a terminal (often <kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>T</kbd>), paste with <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>V</kbd>, press <kbd>Enter</kbd>. It ends with &ldquo;Shyoy installed&rdquo;. The standalone app is <code>/tmp/Shyoy/Shyoy-standalone</code>.</p>
+      </div>
+    </div>
+  </div></section>
+
+  <section class="section gutter" id="daw"><div class="inner">
+    <h2>Then rescan in your DAW</h2>
+    <p>After installing, your music software has to rescan its plug-ins before it sees Shyoy. Put it on an instrument track.</p>
+    <ul class="rows">
+      <li><strong>Ableton Live</strong><span>Settings &gt; Plug-ins, turn on &ldquo;Use VST3 Plug-in System Folders&rdquo;, click Rescan.</span></li>
+      <li><strong>Logic Pro / GarageBand</strong><span>(Mac) It appears under Audio Units. If not, restart Logic.</span></li>
+      <li><strong>FL Studio</strong><span>Options &gt; Manage plugins &gt; Find plugins.</span></li>
+      <li><strong>Reaper</strong><span>Options &gt; Preferences &gt; Plug-ins &gt; VST &gt; Re-scan.</span></li>
+      <li><strong>Bitwig, Cubase, Studio One and others</strong><span>Rescan plug-ins or restart the DAW.</span></li>
+    </ul>
+    <p>Installing by hand: unzip, then copy <code>Shyoy.vst3</code> to the VST3 folder below. On a Mac, also copy <code>Shyoy.component</code> to the Components folder. Each zip has an INSTALL.txt.</p>
+    <ul class="rows">
+      <li><strong>macOS</strong><span><code>~/Library/Audio/Plug-Ins/VST3</code> and <code>~/Library/Audio/Plug-Ins/Components</code></span></li>
+      <li><strong>Windows</strong><span><code>C:\Program Files\Common Files\VST3</code></span></li>
+      <li><strong>Linux</strong><span><code>~/.vst3</code></span></li>
+    </ul>
+  </div></section>
+
+  <section class="section gutter" id="unsigned"><div class="inner">
+    <h2>Unsigned builds</h2>
+    <p>Shyoy isn&rsquo;t signed by Apple or Microsoft, so your computer may warn you the first time. Here&rsquo;s what to do.</p>
+    <div class="note">
+      <h3>macOS</h3>
+      <p>The plug-in isn&rsquo;t notarised by Apple. The Terminal line above already clears the quarantine flag. If you download the zip in a browser and copy the files by hand, run this in Terminal afterwards:</p>
+      <div class="cmd"><code data-cmd="xattr -dr com.apple.quarantine ~/Library/Audio/Plug-Ins/VST3/Shyoy.vst3 ~/Library/Audio/Plug-Ins/Components/Shyoy.component">xattr -dr com.apple.quarantine ~/Library/Audio/Plug-Ins/VST3/Shyoy.vst3 ~/Library/Audio/Plug-Ins/Components/Shyoy.component</code><button type="button" class="copy">Copy</button></div>
+      <p>Otherwise Logic or Ableton may say the plug-in &ldquo;is damaged&rdquo;.</p>
+    </div>
+    <div class="note">
+      <h3>Windows</h3>
+      <p>Windows may warn that the plug-in is from an unknown publisher. For the app, click <b>More info</b>, then <b>Run anyway</b>.</p>
+      <p>The panel uses Microsoft Edge WebView2, which comes with Windows 10 and 11. If the window stays blank, install the &ldquo;Evergreen WebView2 Runtime&rdquo; from Microsoft.</p>
+    </div>
+    <div class="note">
+      <h3>Linux</h3>
+      <p>The panel needs WebKitGTK 4.1 (or 4.0).</p>
+      <p>Debian / Ubuntu:</p>
+      <div class="cmd"><code data-cmd="sudo apt install libwebkit2gtk-4.1-0">sudo apt install libwebkit2gtk-4.1-0</code><button type="button" class="copy">Copy</button></div>
+      <p>Fedora:</p>
+      <div class="cmd"><code data-cmd="sudo dnf install webkit2gtk4.1">sudo dnf install webkit2gtk4.1</code><button type="button" class="copy">Copy</button></div>
+      <p>Arch:</p>
+      <div class="cmd"><code data-cmd="sudo pacman -S webkit2gtk-4.1">sudo pacman -S webkit2gtk-4.1</code><button type="button" class="copy">Copy</button></div>
+    </div>
+  </div></section>
+
+  <section class="section gutter" id="using"><div class="inner">
+    <h2>What&rsquo;s in it</h2>
+    <ul class="rows">
+      <li><strong>Voice</strong><span>VCO with saw, pulse with PWM, sub-oscillator and noise. A resonant filter that self-oscillates, ADSR envelope, VCA, LFO and portamento. Oversampling 1x, 2x or 4x (Options &gt; Audio).</span></li>
+      <li><strong>Bender</strong><span>VCO, VCF and LFO amounts, and octave transpose.</span></li>
+      <li><strong>Sequencer</strong><span>16 steps with separate octave, gate, slide and accent lanes. Each lane has its own length, start and RETRIG, and there is a STEP CYCLE reset. Slides glide at the portamento time.</span></li>
+      <li><strong>Record</strong><span>Record a note list that the gate lane plays through, with a loop length and note-per-gate or note-per-step advance.</span></li>
+      <li><strong>Randomise</strong><span>Click the shyoy logo for a new sound, at a level that matches the presets.</span></li>
+      <li><strong>Presets</strong><span>Save, rename, duplicate, delete, import and export. Each preset holds its pattern.</span></li>
+      <li><strong>Sliders</strong><span>Right-click a slider to change its taper curve.</span></li>
+      <li><strong>MIDI</strong><span>Notes, pitch bend, mod, sustain, and CC 1&ndash;25 on the panel controls. In the web app a Bass Station II gets its own map. The web app needs Chrome or Edge on desktop for MIDI; other browsers play sound but have no MIDI.</span></li>
+      <li><strong>In your DAW</strong><span>The sequencer follows the DAW tempo and locks to its bar while playing, and each sound is saved with your project.</span></li>
+    </ul>
+  </div></section>
+
+  <section class="section gutter" id="help"><div class="inner">
+    <h2>Updating and trouble</h2>
+    <p>The download links always point to the newest build. To update, run the same install command again. Shyoy is a beta, so preset formats may change between versions.</p>
+    <p>Presets and options are shared by every Shyoy instance, and live in <code>~/Library/Shyoy</code> (Mac), <code>%APPDATA%\Shyoy</code> (Windows) or <code>~/.config/Shyoy</code> (Linux).</p>
+    <details><summary>Nothing shows up in my DAW</summary><p>Check the plug-in is in the folder listed above, then rescan. If it still isn&rsquo;t there, restart the DAW.</p></details>
+    <details><summary>My Mac says it &ldquo;is damaged&rdquo;</summary><p>You downloaded the zip in a browser. Use the Terminal command instead, or run the <code>xattr</code> command in <a href="#unsigned">Unsigned builds</a>.</p></details>
+    <details><summary>The plug-in window is blank</summary><p>On Windows, install the Evergreen WebView2 Runtime from Microsoft. On Linux, install WebKitGTK 4.1 (see <a href="#unsigned">above</a>).</p></details>
+    <details><summary>Still stuck?</summary><p>Email <a href="mailto:hello@johnnyhawk.org">hello@johnnyhawk.org</a> and say which computer you have, which DAW, and what happened.</p></details>
+  </div></section>
+</main>
+
+<footer class="gutter"><div class="inner">
+  <p>Shyoy is free, with no warranty.</p>
+  <p><a href="/shyoy/shyoy-quick-start.pdf" target="_blank" rel="noopener">Quick start guide (PDF)</a> · <a href="mailto:hello@johnnyhawk.org">hello@johnnyhawk.org</a> · <a href="/">Johnny Hawk Audio</a></p>
+</div></footer>
+
+<script>
+(function () {
+  // Copy buttons: copy the exact single-line command from data-cmd.
+  document.querySelectorAll(".cmd").forEach(function (box) {
+    var code = box.querySelector("code"), btn = box.querySelector(".copy");
+    var text = code.getAttribute("data-cmd");
+    function done() {
+      btn.textContent = "Copied!"; btn.classList.add("done");
+      setTimeout(function () { btn.textContent = "Copy"; btn.classList.remove("done"); }, 1800);
+    }
+    function fallback() {
+      var ta = document.createElement("textarea");
+      ta.value = text; ta.setAttribute("readonly", ""); ta.style.position = "fixed"; ta.style.opacity = "0";
+      document.body.appendChild(ta); ta.select();
+      var ok = false; try { ok = document.execCommand("copy"); } catch (e) {}
+      document.body.removeChild(ta);
+      if (ok) done(); else { var r = document.createRange(); r.selectNodeContents(code); var s = getSelection(); s.removeAllRanges(); s.addRange(r); btn.textContent = "Selected"; }
+    }
+    btn.addEventListener("click", function () {
+      if (navigator.clipboard && window.isSecureContext) navigator.clipboard.writeText(text).then(done, fallback);
+      else fallback();
+    });
+  });
+
+  // OS: mark the visitor's own computer and move it to the top. All three stay.
+  var ua = navigator.userAgent || "", plat = (navigator.userAgentData && navigator.userAgentData.platform) || navigator.platform || "";
+  var mobile = /iPhone|iPad|iPod|Android/i.test(ua);
+  var guess = null;
+  if (!mobile) {
+    if (/Win/i.test(plat + ua)) guess = "windows";
+    else if (/Mac/i.test(plat + ua)) guess = "mac";
+    else if (/Linux|X11|CrOS/i.test(plat + ua)) guess = "linux";
+  }
+  var hash = (location.hash || "").slice(1);
+  if (["mac", "windows", "linux"].indexOf(hash) > -1) guess = hash;
+  var msg = document.getElementById("detected");
+  if (guess) {
+    var box = document.getElementById(guess), list = document.getElementById("oses");
+    box.classList.add("mine");
+    list.insertBefore(box, list.firstChild);
+    msg.textContent = "It looks like you\u2019re on " + { mac: "a Mac", windows: "Windows", linux: "Linux" }[guess] + ", so that\u2019s first. The others are below.";
+  } else if (mobile) {
+    msg.textContent = "Reading on your phone? Pick the computer you\u2019ll install it on.";
+  }
+})();
+</script>
+
+</body>
+</html>
